@@ -7,4 +7,4 @@ The main purpose is to provide an automated way to build a fully functional and 
 
 ## References
 
-- [Sphinx Search configuration](http://sphinxsearch.com/docs/current.html#conf-reference)
+- [Sphinx Search configuration options](http://sphinxsearch.com/docs/current.html#conf-reference)

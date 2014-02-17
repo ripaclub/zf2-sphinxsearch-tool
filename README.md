@@ -1,4 +1,9 @@
 ZF2 Sphinx Search Tools
 =======================
 
-A Zend Framework 2 module that provides a set of tools to configure and handle Sphinx Search engine.
+A ZF2 module that provides a set of tools to configure and handle Sphinx Search engine.
+
+The main purpose is:
+
+* provide an automated way to build a fully functional and correct Sphinx Search configuration file, starting from a ZF2 module configuration file
+* ...

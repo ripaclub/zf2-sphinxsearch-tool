@@ -3,9 +3,7 @@
   "description" : "Module that provides a set of tools to configure and handle SphinxSearch engine",
   "require" : {
     "php" : ">=5.4",
-
-        "zendframework/zendframework": "~2"
-
+    "zendframework/zendframework" : "~2"
   },
   "require-dev" : {
     "phpunit/phpunit" : ">=4.0",
@@ -27,7 +25,7 @@
   "autoload" : {
     "classmap" : [ "./Module.php" ]
   },
+  "bin" : [ "sphinx-tool.php" ],
   "license" : "BSD-2-Clause",
-  "homepage" : "https://github.com/ripaclub/zf2-sphinxsearch-tools",
-  "bin": ["zf.php"]
+  "homepage" : "https://github.com/ripaclub/zf2-sphinxsearch-tool"
 }

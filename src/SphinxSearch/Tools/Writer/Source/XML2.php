@@ -16,8 +16,7 @@ use SphinxSearch\Tools\Writer\Source\AttributesAwareTrait;
 
 /**
  * Class XML2
- *
- * Efficiently generate XML for Sphinx's xmlpipe2 driver
+ * Generate an XML data source suitable for xmlpipe2 driver
  */
 class XML2 extends \XMLWriter implements SourceInterface
 {
@@ -39,29 +38,8 @@ class XML2 extends \XMLWriter implements SourceInterface
     }
 
     /**
-     * @param array $doc
-     * @throws \SphinxSearch\Tools\Writer\Exception\NotValidDocumentException
+     * {@inheritdoc}
      */
-    public function addDocument(array $doc)
-    {
-        $this->startElement('sphinx:document');
-        if (!isset($doc['id'])) {
-            throw new NotValidDocumentException('Document array must have an element with "id" key');
-        }
-        $this->writeAttribute('id', $doc['id']);
-        foreach ($doc as $key => $value) {
-            // Skip the id key since that is an element attribute
-            if ($key == 'id') {
-                continue;
-            }
-            $this->startElement($key);
-            $this->text($value);
-            $this->endElement();
-        }
-        $this->endElement();
-        print $this->outputMemory();
-    }
-
     public function beginOutput()
     {
         $this->startDocument('1.0', 'UTF-8');
@@ -86,6 +64,32 @@ class XML2 extends \XMLWriter implements SourceInterface
         print $this->outputMemory();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function addDocument(array $doc)
+    {
+        $this->startElement('sphinx:document');
+        if (!isset($doc['id'])) {
+            throw new NotValidDocumentException('Document array must have an element with "id" key');
+        }
+        $this->writeAttribute('id', $doc['id']);
+        foreach ($doc as $key => $value) {
+            // Skip the id key since that is an element attribute
+            if ($key == 'id') {
+                continue;
+            }
+            $this->startElement($key);
+            $this->text($value);
+            $this->endElement();
+        }
+        $this->endElement();
+        print $this->outputMemory();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function endOutput()
     {
         // End sphinx:docset

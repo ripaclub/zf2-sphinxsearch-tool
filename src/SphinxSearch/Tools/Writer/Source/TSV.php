@@ -10,5 +10,45 @@
  */
 namespace SphinxSearch\Tools\Writer\Source;
 
-class TSV {
+/**
+ * Class TSV
+ *
+ */
+class TSV implements SourceInterface
+{
+    // TODO: see function fputcsv http://php.net/manual/en/function.fputcsv.php
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($options = [])
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function openURI($uri)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beginOutput()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addDocument(array $doc)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function endOutput()
+    {
+    }
 }

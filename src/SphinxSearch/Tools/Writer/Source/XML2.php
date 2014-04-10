@@ -11,8 +11,8 @@
 namespace SphinxSearch\Tools\Writer\Source;
 
 use SphinxSearch\Tools\Writer\Exception\NotValidDocumentException;
-use SphinxSearch\Tools\Writer\Source\FieldsAwareTrait;
 use SphinxSearch\Tools\Writer\Source\AttributesAwareTrait;
+use SphinxSearch\Tools\Writer\Source\FieldsAwareTrait;
 
 /**
  * Class XML2
@@ -24,7 +24,7 @@ class XML2 extends \XMLWriter implements SourceInterface
     use AttributesAwareTrait;
 
     /**
-     * @param array $options
+     * {@inheritdoc}
      */
     public function __construct($options = [])
     {

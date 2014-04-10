@@ -8,7 +8,6 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-
 namespace SphinxSearch\Tools\Writer\Source;
 
 /**
@@ -16,6 +15,21 @@ namespace SphinxSearch\Tools\Writer\Source;
  */
 interface SourceInterface
 {
+    /**
+     * Create the data source instance
+     *
+     * @param array $options
+     */
+    public function __construct($options = []);
+
+    /**
+     * Create new data source using URI for output
+     *
+     * @param $uri
+     * @return bool TRUE on success or FALSE on failure
+     */
+    public function openURI($uri);
+
     /**
      * Begin the data source file
      *

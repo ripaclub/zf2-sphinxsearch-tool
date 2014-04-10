@@ -19,4 +19,22 @@ use Zend\Mvc\Controller\AbstractActionController;
 class ConsoleController extends AbstractActionController
 {
     use CliTrait;
+
+    /**
+     * @return bool
+     */
+    public function sourceAction()
+    {
+        echo 'todo source action' . PHP_EOL;
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function configAction()
+    {
+        echo 'todo' . PHP_EOL;
+        return false;
+    }
 }

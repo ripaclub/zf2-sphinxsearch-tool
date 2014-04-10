@@ -23,18 +23,46 @@ class XML2 extends \XMLWriter implements SourceInterface
     use FieldsAwareTrait;
     use AttributesAwareTrait;
 
+    protected $options;
+    protected $defaultOptions = ['indent' => false, 'indent_string' => "\t"];
+
+    /**
+     * Constructor
+     * @param array $options
+     */
+    public function __construct(array $options = [])
+    {
+        $this->setOptions($options);
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function __construct($options = [])
+    public function initialize()
     {
-        $defaults = ['indent' => false];
-        $options = array_merge($defaults, $options);
         // Store the xml tree in memory
         $this->openMemory();
-        if ($options['indent']) {
-            $this->setIndent(true);
-        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = array_merge($this->defaultOptions, $options);
+        $this->setIndent((bool)$this->options['indent']);
+        $this->setIndentString((string)$this->options['indent_string']);
+
+        return $this;
     }
 
     /**

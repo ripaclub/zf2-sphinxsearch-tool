@@ -45,11 +45,9 @@ class Module implements
      */
     public function getConfig()
     {
-
-
         $moduleConfig = include __DIR__ . '/config/module.config.php';
-        $moduleConfig['sphinxsearch_configuration'][] = include __DIR__ . '/config/routes.config.php';
-        $moduleConfig['sphinxsearch_configuration'][] = include __DIR__ . '/config/default.config.php';
+        $moduleConfig = array_merge($moduleConfig, include __DIR__ . '/config/routes.config.php');
+        $moduleConfig['sphinxsearch_tools'] = ['defaults' => include __DIR__ . '/config/default.config.php'];
 
         return $moduleConfig;
     }
@@ -59,7 +57,9 @@ class Module implements
      */
     public function getConsoleBanner(AdapterInterface $console)
     {
-        $figlet = new Figlet(['font' => __DIR__ . 'assets/font/lean.flf']);
+        $figlet = new Figlet(['font' => __DIR__ . '/assets/font/lean.flf']);
+        $figlet->setOutputWidth($console->getWidth());
+        $figlet->setJustification(Figlet::JUSTIFICATION_CENTER);
 
         return $figlet->render('SphinxSearch Tools');
     }

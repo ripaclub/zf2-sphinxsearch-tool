@@ -20,7 +20,7 @@ class TSV implements SourceInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct($options = [])
+    public function initialize()
     {
     }
 

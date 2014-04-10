@@ -16,11 +16,9 @@ namespace SphinxSearch\Tools\Writer\Source;
 interface SourceInterface
 {
     /**
-     * Create the data source instance
-     *
-     * @param array $options
+     * Open the memory
      */
-    public function __construct($options = []);
+    public function initialize();
 
     /**
      * Create new data source using URI for output

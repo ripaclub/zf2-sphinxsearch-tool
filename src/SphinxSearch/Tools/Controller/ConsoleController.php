@@ -8,11 +8,15 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
+namespace SphinxSearch\Tools\Controller;
 
-return [
-    'service_manager' => [
-        'invokable' => [
-            'SphinxSearch\Tools\Controller\Console' => 'SphinxSearch\Tools\Controller\ConsoleController'
-        ]
-    ]
-];
+use SphinxSearch\Tools\Controller\CliTrait;
+use Zend\Mvc\Controller\AbstractActionController;
+
+/**
+ * Class ConsoleController
+ */
+class ConsoleController extends AbstractActionController
+{
+    use CliTrait;
+}

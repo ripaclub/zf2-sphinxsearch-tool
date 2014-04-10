@@ -20,7 +20,11 @@ use Zend\Text\Figlet\Figlet;
 /**
  * Class Module
  */
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ConsoleBannerProviderInterface, ConsoleUsageProviderInterface
+class Module implements
+    AutoloaderProviderInterface,
+    ConfigProviderInterface,
+    ConsoleBannerProviderInterface,
+    ConsoleUsageProviderInterface
 {
     /**
      * {@inheritdoc}
@@ -41,7 +45,13 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Co
      */
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+
+
+        $moduleConfig = include __DIR__ . '/config/module.config.php';
+        $moduleConfig['sphinxsearch_configuration'][] = include __DIR__ . '/config/routes.config.php';
+        $moduleConfig['sphinxsearch_configuration'][] = include __DIR__ . '/config/default.config.php';
+
+        return $moduleConfig;
     }
 
     /**
@@ -49,9 +59,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Co
      */
     public function getConsoleBanner(AdapterInterface $console)
     {
-        $figlet = new Figlet(['font' => __DIR__ . 'resources/fonts/lean.flf']);
+        $figlet = new Figlet(['font' => __DIR__ . 'assets/font/lean.flf']);
 
-        return $figlet->render('ciao');
+        return $figlet->render('SphinxSearch Tools');
     }
 
     /**

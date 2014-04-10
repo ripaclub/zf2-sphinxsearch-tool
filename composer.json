@@ -5,12 +5,18 @@
     "minimum-stability": "dev",
     "license": "BSD-2-Clause",
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zend-config": "2.2.*"
+        "php": ">=5.4",
+        "zendframework/zend-console": ">=2.3",
+        "zendframework/zend-mvc": ">=2.3",
+        "zendframework/zend-text": ">=2.3",
+        "zendframework/zend-modulemanager": ">=2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.8.*",
-        "phpmd/phpmd": "1.4.*",
+        "phpunit/phpunit": ">=4.0",
+        "phpmd/phpmd": "1.5.*",
+        "pdepend/pdepend": "1.1.*",
+        "squizlabs/php_codesniffer": "1.5.*",
+        "fabpot/php-cs-fixer": "*",
         "satooshi/php-coveralls": "dev-master"
     },
     "authors": [
@@ -29,12 +35,13 @@
         ]
     },
     "keywords": [
+        "search",
         "zf2",
         "sphinx",
         "tools",
         "configuration",
-        "searchd",
-        "index",
+        "config",
+        "indexing",
         "search engine"
     ]
 }

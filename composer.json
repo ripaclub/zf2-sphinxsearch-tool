@@ -1,47 +1,33 @@
 {
-    "name": "ripaclub/zf2-sphinxsearch-tools",
-    "description": "Module that provides a set of tools to configure and handle SphinxSearch engine",
-    "homepage": "https://github.com/ripaclub/zf2-sphinxsearch-tools",
-    "minimum-stability": "dev",
-    "license": "BSD-2-Clause",
-    "require": {
-        "php": ">=5.4",
-        "zendframework/zend-console": ">=2.3",
-        "zendframework/zend-mvc": ">=2.3",
-        "zendframework/zend-text": ">=2.3",
-        "zendframework/zend-modulemanager": ">=2.3"
-    },
-    "require-dev": {
-        "phpunit/phpunit": ">=4.0",
-        "phpmd/phpmd": "1.5.*",
-        "pdepend/pdepend": "1.1.*",
-        "squizlabs/php_codesniffer": "1.5.*",
-        "fabpot/php-cs-fixer": "*",
-        "satooshi/php-coveralls": "dev-master"
-    },
-    "authors": [
-        {
-            "name": "Leonardo Di Donato",
-            "email": "leodidonato@gmail.com"
-        },
-        {
-            "name": "Leonardo Grasso",
-            "email": "me@leonardograsso.com"
-        }
-    ],
-    "autoload": {
-        "classmap": [
-            "./Module.php"
-        ]
-    },
-    "keywords": [
-        "search",
-        "zf2",
-        "sphinx",
-        "tools",
-        "configuration",
-        "config",
-        "indexing",
-        "search engine"
-    ]
+  "name" : "ripaclub/zf2-sphinxsearch-tool",
+  "description" : "Module that provides a set of tools to configure and handle SphinxSearch engine",
+  "require" : {
+    "php" : ">=5.4",
+
+        "zendframework/zendframework": "~2"
+
+  },
+  "require-dev" : {
+    "phpunit/phpunit" : ">=4.0",
+    "phpmd/phpmd" : "1.5.*",
+    "pdepend/pdepend" : "1.1.*",
+    "squizlabs/php_codesniffer" : "1.5.*",
+    "fabpot/php-cs-fixer" : "*",
+    "satooshi/php-coveralls" : "dev-master"
+  },
+  "authors" : [ {
+    "name" : "Leo Di Donato",
+    "email" : "leodidonato@gmail.com"
+  }, {
+    "name" : "Leonardo Grasso",
+    "email" : "me@leonardograsso.com"
+  } ],
+  "keywords" : [ "search", "zf2", "sphinx", "tools", "configuration", "config", "indexing", "search engine" ],
+  "minimum-stability" : "dev",
+  "autoload" : {
+    "classmap" : [ "./Module.php" ]
+  },
+  "license" : "BSD-2-Clause",
+  "homepage" : "https://github.com/ripaclub/zf2-sphinxsearch-tools",
+  "bin": ["zf.php"]
 }

@@ -14,5 +14,8 @@ return [
         'invokable' => [
             'SphinxSearch\Tools\Controller\Console' => 'SphinxSearch\Tools\Controller\ConsoleController'
         ]
+    ],
+    'view_manager' => [
+        'display_not_found_reason' => false
     ]
 ];

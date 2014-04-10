@@ -47,8 +47,8 @@ class Module implements
     {
         $moduleConfig = include __DIR__ . '/config/module.config.php';
         $moduleConfig = array_merge($moduleConfig, include __DIR__ . '/config/routes.config.php');
-        $moduleConfig['sphinxsearch_tools'] = ['defaults' => include __DIR__ . '/config/default.config.php'];
-
+//        TODO: load only when defaults config values are needed
+//        $moduleConfig['sphinxsearch_tools'] = ['defaults' => include __DIR__ . '/config/default.config.php'];
         return $moduleConfig;
     }
 
@@ -57,11 +57,10 @@ class Module implements
      */
     public function getConsoleBanner(AdapterInterface $console)
     {
-        $figlet = new Figlet(['font' => __DIR__ . '/assets/font/lean.flf']);
+        $figlet = new Figlet(['font' => __DIR__ . '/assets/font/colossal.flf']);
         $figlet->setOutputWidth($console->getWidth());
         $figlet->setJustification(Figlet::JUSTIFICATION_CENTER);
-
-        return $figlet->render('SphinxSearch Tools');
+        return PHP_EOL . $figlet->render('Sphinx Search Tools');
     }
 
     /**

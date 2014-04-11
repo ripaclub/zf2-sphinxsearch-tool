@@ -15,7 +15,7 @@ return [
             'routes' => [
                 'sphinxsearch-build-source' => [
                     'options' => [
-                        'route' => 'sphinx build source',
+                        'route' => 'sphinx build source', // TODO: finish
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tools\Controller\Console',
                             'action' => 'source'
@@ -24,7 +24,7 @@ return [
                 ],
                 'sphinxsearch-build-config' => [
                     'options' => [
-                        'route' => 'sphinx build config',
+                        'route' => 'sphinx build config', // TODO: finish
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tools\Controller\Console',
                             'action' => 'config'

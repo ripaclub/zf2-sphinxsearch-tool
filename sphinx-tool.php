@@ -28,25 +28,25 @@ if (file_exists("$basePath/vendor/autoload.php")) {
 
 if (file_exists("$basePath/config/application.config.php")) {
     $appConfig = require "$basePath/config/application.config.php";
-    if (!isset($appConfig['modules']['ZFTool'])) {
-        $appConfig['modules'][] = 'ZFTool';
-        $appConfig['module_listener_options']['module_paths']['ZFTool'] = __DIR__;
+    if (!isset($appConfig['modules']['SphinxSearch\Tool'])) {
+        $appConfig['modules'][] = 'SphinxSearch\Tool';
+        $appConfig['module_listener_options']['module_paths']['SphinxSearch\Tool'] = __DIR__;
     }
 } else {
-    $appConfig = array(
-        'modules' => array(
+    $appConfig = [
+        'modules' => [
             'SphinxSearch\Tool',
-        ),
-        'module_listener_options' => array(
-            'config_glob_paths'    => array(
+        ],
+        'module_listener_options' => [
+            'config_glob_paths'    => [
                 'config/autoload/{,*.}{global,local}.php',
-            ),
-            'module_paths' => array(
+            ],
+            'module_paths' => [
                 '.',
                 './vendor',
-            ),
-        ),
-    );
+            ],
+        ],
+    ];
 }
 
 Zend\Mvc\Application::init($appConfig)->run();

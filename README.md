@@ -1,19 +1,19 @@
 Sphinx Search Tool [![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-sphinxsearch-tool)](https://github.com/igrigorik/ga-beacon)
 =======================
 
-An utility module that provides a set of tools to configure and handle Sphinx Search engine.
+An utility that provides a set of tools to configure and handle Sphinx Search engine.
 
 The main purpose is to provide an automated way to build a fully functional and correct Sphinx Search configuration, starting from a ZF2 module configuration file.
 
-It runs from the command line as standalone CLI tool or can be installed as ZF2 module.
+It runs from the command line as standalone CLI tool or can be installed as a ZF2 module.
 
 ## References
 
 - [Sphinx Search configuration options](http://sphinxsearch.com/docs/current.html#conf-reference)
 
 ## Requirements
- * Zend Framework 2.0.0 or later.
- * PHP 5.4.0 or later.
+ * Zend Framework 2.0.0 or later
+ * PHP 5.4.0 or later
  * Console access to the application being maintained (shell, command prompt)
 
 ## Installation as standalone using [Composer](http://getcomposer.org)

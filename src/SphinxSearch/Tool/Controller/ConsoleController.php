@@ -1,16 +1,16 @@
 <?php
 /**
- * zf2-sphinxsearch-tools
+ * zf2-sphinxsearch-tool
  *
- * @link        https://github.com/ripaclub/zf2-sphinxsearch-tools
+ * @link        https://github.com/ripaclub/zf2-sphinxsearch-tool
  * @copyright   Copyright (c) 2014,
  *              Leonardo Di Donato <leodidonato at gmail dot com>
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tools\Controller;
+namespace SphinxSearch\Tool\Controller;
 
-use SphinxSearch\Tools\Controller\CliTrait;
+use SphinxSearch\Tool\Controller\CliTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**

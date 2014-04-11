@@ -1,6 +1,6 @@
 <?php
 /**
- * zf2-sphinxsearch-tools
+ * zf2-sphinxsearch-tool
  *
  * @link        https://github.com/ripaclub/zf2-sphinxsearch-tools
  * @copyright   Copyright (c) 2014,
@@ -8,7 +8,7 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tools;
+namespace SphinxSearch\Tool;
 
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;

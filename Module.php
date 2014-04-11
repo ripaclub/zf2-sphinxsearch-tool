@@ -47,8 +47,6 @@ class Module implements
     {
         $moduleConfig = include __DIR__ . '/config/module.config.php';
         $moduleConfig = array_merge($moduleConfig, include __DIR__ . '/config/routes.config.php');
-//        TODO: load only when defaults config values are needed
-//        $moduleConfig['sphinxsearch_tools'] = ['defaults' => include __DIR__ . '/config/default.config.php'];
         return $moduleConfig;
     }
 

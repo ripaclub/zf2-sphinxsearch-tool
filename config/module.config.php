@@ -1,8 +1,8 @@
 <?php
 /**
- * zf2-sphinxsearch-tools
+ * zf2-sphinxsearch-tool
  *
- * @link        https://github.com/ripaclub/zf2-sphinxsearch-tools
+ * @link        https://github.com/ripaclub/zf2-sphinxsearch-tool
  * @copyright   Copyright (c) 2014,
  *              Leonardo Di Donato <leodidonato at gmail dot com>
  *              Leonardo Grasso <me at leonardograsso dot com>
@@ -12,7 +12,7 @@
 return [
     'service_manager' => [
         'invokable' => [
-            'SphinxSearch\Tools\Controller\Console' => 'SphinxSearch\Tools\Controller\ConsoleController'
+            'SphinxSearch\Tool\Controller\Console' => 'SphinxSearch\Tool\Controller\ConsoleController'
         ]
     ],
     'view_manager' => [

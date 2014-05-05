@@ -1,8 +1,8 @@
 <?php
 /**
- * zf2-sphinxsearch-tools
+ * zf2-sphinxsearch-tool
  *
- * @link        https://github.com/ripaclub/zf2-sphinxsearch-tools
+ * @link        https://github.com/ripaclub/zf2-sphinxsearch-tool
  * @copyright   Copyright (c) 2014,
  *              Leonardo Di Donato <leodidonato at gmail dot com>
  *              Leonardo Grasso <me at leonardograsso dot com>
@@ -17,7 +17,7 @@ return [
                     'options' => [
                         'route' => 'sphinx build source', // TODO: finish
                         'defaults' => [
-                            'controller' => 'SphinxSearch\Tools\Controller\Console',
+                            'controller' => 'SphinxSearch\Tool\Controller\Console',
                             'action' => 'source'
                         ],
                     ],
@@ -26,7 +26,7 @@ return [
                     'options' => [
                         'route' => 'sphinx build config', // TODO: finish
                         'defaults' => [
-                            'controller' => 'SphinxSearch\Tools\Controller\Console',
+                            'controller' => 'SphinxSearch\Tool\Controller\Console',
                             'action' => 'config'
                         ],
                     ],

@@ -16,7 +16,7 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
  * PHP 5.4.0 or later
  * Console access to the application being maintained (shell, command prompt)
 
-## Installation as standalone using [Composer](http://getcomposer.org)
+## Standalone installation using [Composer](http://getcomposer.org)
  1. Open console (command prompt)
  2. `git clone https://github.com/ripaclub/zf2-sphinxsearch-tool.git`
  3. `cd zf2-sphinxsearch-tool`
@@ -25,6 +25,20 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
 
 ## Installation as ZF2 module using [Composer](http://getcomposer.org)
  1. Open console (command prompt)
- 2. Go to your application's directory.
- 3. Run `composer require ripaclub/zf2-sphinxsearch-tool:dev-master`
- 4. Execute the `sphinx-tool.php`
+ 2. Go to your application's directory
+ 3. Add the following to your **composer.json**
+
+```json
+"require": {
+    "ripaclub/zf2-sphinxsearch-tool": "dev-develop"
+}
+```
+
+```json
+"repositories": {
+    "type": "vcs",
+    "url": "https://github.com/ripaclub/zf2-sphinxsearch-tool.git"
+}
+```
+4. Run a `composer update`
+5. Execute the `sphinx-tool.php`

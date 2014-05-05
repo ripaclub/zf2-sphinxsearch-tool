@@ -49,4 +49,9 @@ if (file_exists("$basePath/config/application.config.php")) {
     ];
 }
 
+if (file_exists("$basePath/config/sphinxsearch-tool.config.php")) {
+    $appConfig['sphinxsearch_tool'] = require "$basePath/config/sphinxsearch-tool.config.php";
+}
+
+
 Zend\Mvc\Application::init($appConfig)->run();

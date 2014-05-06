@@ -32,7 +32,7 @@ class XML2 extends \XMLWriter implements SourceInterface
      */
     public function __construct(array $options = [])
     {
-        $this->openUri('php://output');
+        $this->initialize(); // $this->openUri('php://output');
         $this->setOptions($options);
     }
 

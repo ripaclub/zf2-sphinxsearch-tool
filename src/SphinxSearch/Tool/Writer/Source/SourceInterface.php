@@ -26,7 +26,7 @@ interface SourceInterface
      * @param $uri
      * @return bool TRUE on success or FALSE on failure
      */
-    public function openURI($uri);
+    public function openUri($uri);
 
     /**
      * Begin the data source file

@@ -11,19 +11,19 @@
 return [
     'defaults' => [
         'variables' => [
-            'logPath'      => '/var/log/sphinx/',
-            'binLogPath'   => '/var/lib/sphinx/',
-            'runPath'      => '/var/run/sphinx/',
+            'log_path'      => '/var/log/sphinx/',
+            'lib_path'      => '/var/lib/sphinx/',
+            'run_path'      => '/var/run/sphinx/',
+            'idx_path'      => '/var/idx/sphinx/',
         ],
-
         'sections' => [
             'searchd' => [
                 'listen'        => '9306:mysql41',
-                'log'           => '{logPath}searchd.log',
-                'query_log'     => '{logPath}query.log',
-                'binlog_path'   => '{binLogPath}',
-                'pid_file'      => '{runPath}searchd.pid',
-                'sphinxql_state'=> '{runPath}state.sql',
+                'log'           => '{log_path}searchd.log',
+                'query_log'     => '{log_path}query.log',
+                'binlog_path'   => '{lib_path}',
+                'pid_file'      => '{run_path}searchd.pid',
+                'sphinxql_state'=> '{run_path}state.sql',
                 'workers'       => 'threads'
             ],
             'indexer' => [
@@ -32,8 +32,6 @@ return [
             ]
         ],
     ],
-
-
     'configs' => [
         'config_name' => [
             'sections' => [
@@ -41,7 +39,6 @@ return [
                 'indexer' => [],
             ],
             'sources' => [
-
             ],
             'indexes' => [
                 'index_name' => [
@@ -58,6 +55,4 @@ return [
             ],
         ],
     ],
-
-
 ];

@@ -33,6 +33,7 @@ trait ConfigTrait
                 $config = Factory::fromFile($file, false);
             }
         }
+        var_dump($config);
         if (empty($config)) {
             throw new \RuntimeException('Invalid configuration');
         }

@@ -12,6 +12,7 @@ namespace SphinxSearch\Tool\Controller\Console;
 
 use SphinxSearch\Tool\Controller\Traits\CliTrait;
 use SphinxSearch\Tool\Controller\Traits\ConfigTrait;
+use Zend\Console\ColorInterface;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -26,7 +27,7 @@ class SphinxConfigController extends AbstractActionController
     /**
      * @return bool
      */
-    public function showConfigAction()
+    public function showAction()
     {
         /** @var Request $request */
         $request = $this->getRequest();
@@ -35,8 +36,10 @@ class SphinxConfigController extends AbstractActionController
         return $this->getConfig($filename)->toArray(); //false;
     }
 
-    public function printConfigAction()
+    public function printAction()
     {
-
+        // TODO
+        $console = $this->getConsole()->writeLine('TO BE DONE', ColorInterface::RED);
+        return false;
     }
 }

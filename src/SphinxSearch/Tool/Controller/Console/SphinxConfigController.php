@@ -29,17 +29,25 @@ class SphinxConfigController extends AbstractActionController
      */
     public function showAction()
     {
+        // Retrieve parameters
         /** @var Request $request */
         $request = $this->getRequest();
         $filename = $request->getParam('file');
-        // print_r($this->getConfig($filename)->toArray());
-        return $this->getConfig($filename)->toArray(); //false;
+        // Retrieve configuration
+        $config = $this->getConfig($filename)->toArray();
+        // Show configuration
+        $console = $this->getConsole();
+        $console->writeLine(var_export($config));
+        return false;
     }
 
     public function printAction()
     {
         // TODO
-        $console = $this->getConsole()->writeLine('TO BE DONE', ColorInterface::RED);
+
+        print_r($this->getServiceLocator()->get('config'));
+        $console = $this->getConsole();
+        $console->writeLine('TO BE DONE', ColorInterface::RED);
         return false;
     }
 }

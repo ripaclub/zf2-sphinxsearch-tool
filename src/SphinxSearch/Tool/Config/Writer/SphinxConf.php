@@ -10,6 +10,8 @@
  */
 namespace SphinxSearch\Tool\Config\Writer;
 
+use Zend\Config\Config;
+use Zend\Config\Processor\Token;
 use Zend\Config\Writer\AbstractWriter;
 
 /**
@@ -24,8 +26,22 @@ class SphinxConf extends AbstractWriter
      */
     public function processConfig(array $config)
     {
+        $temp = new Config($config, true);
+        if (isset($config['variables'])) {
+            $vars = array_map(
+                function ($x) {
+                    return '{' . $x . '}';
+                },
+                array_keys($config['variables'])
+            );
+            $vals = array_values($config['variables']);
+            $tokens = array_combine($vars, $vals);
+            $processor = new Token();
+            $processor->setTokens($tokens);
+            $processor->process($temp);
+        }
+        // TODO: finish
         $string = '';
-
         return $string;
     }
 

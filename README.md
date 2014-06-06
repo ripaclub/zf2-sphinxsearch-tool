@@ -35,10 +35,12 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
 ```
 
 ```json
-"repositories": {
+"repositories": [
+    {
     "type": "vcs",
     "url": "https://github.com/ripaclub/zf2-sphinxsearch-tool.git"
-}
+    }
+]
 ```
 4. Run a `composer update`
 5. Execute the `sphinx-tool.php`

@@ -41,6 +41,8 @@ class SphinxConfigController extends AbstractActionController
     }
 
     /**
+     * TODO: add exvlusive lock
+     * TODO: force filename parameter
      * @return bool
      */
     public function printAction()
@@ -49,6 +51,7 @@ class SphinxConfigController extends AbstractActionController
         /** @var Request $request */
         $request = $this->getRequest();
         $filename = $request->getParam('file');
+//        $elock = $request->getParam('elock');
         // Retrieve configuration
         $config = $this->getConfig($filename)->toArray();
 
@@ -57,6 +60,7 @@ class SphinxConfigController extends AbstractActionController
 
         $writer = new SphinxConf();
         echo $writer->processConfig($config);
+//        $writer->toFile($filename, $config);
 
 
         return false;

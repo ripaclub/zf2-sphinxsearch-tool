@@ -19,78 +19,80 @@ use Zend\Config\Writer\AbstractWriter;
  */
 class SphinxConf extends AbstractWriter
 {
-
     /**
      * @param array $config
      * @return string
      */
     public function processConfig(array $config)
     {
-        $temp = new Config($config, true);
+        $string = '';
+        $config = new Config($config, true);
         // Substitute variables
-        if (isset($config['variables'])) {
+        $config = $this->substituteVars($config);
+        // Format searchd deamon config
+        $string .= $this->getCommandConf($config, 'searchd');
+        // Format indexer command config
+        $string .= $this->getCommandConf($config, 'indexer');
+        // TODO: Format indexes config
+
+        return $string;
+    }
+
+    /**
+     * Substitute defined variables, if any found and return the new configuration object
+     *
+     * @param Config $config
+     * @param string $prefix
+     * @param string $suffix
+     * @return Config
+     */
+    protected function substituteVars(Config $config, $prefix = '{', $suffix = '}')
+    {
+        if (isset($config->variables)) {
             $vars = array_map(
-                function ($x) {
-                    return '{' . $x . '}';
+                function ($x) use ($prefix, $suffix) {
+                    return $prefix . $x . $suffix;
                 },
-                array_keys($config['variables'])
+                array_keys($config->variables)
             );
-            $vals = array_values($config['variables']);
+            $vals = array_values($config->variables);
             $tokens = array_combine($vars, $vals);
             $processor = new Token();
             $processor->setTokens($tokens);
-            $processor->process($temp);
+            $processor->process($config);
+            // Remove variables node
+            unset($config->variables);
         }
-        // Remove variables node
-        unset($temp->variables);
-        // Format searchd deamon config
-        $string = '';
-        if (isset($temp->searchd)) {
-            /** @var Config $searchdConf */
-            $searchdConf = $temp->searchd;
-            if ($searchdConf->count() > 0) {
-                $searchdConf = $searchdConf->toArray();
-                /** @var array $searchdConf */
-                $string .= 'searchd' . PHP_EOL . '{' . PHP_EOL;
-                $string .= implode(
-                    PHP_EOL,
-                    array_map(
-                        function ($key) use ($searchdConf) {
-                            return $key . ' = ' . $searchdConf[$key];
-                        },
-                        array_keys($searchdConf)
-                    )
-                );
-                $string .= PHP_EOL . '}' . PHP_EOL;
-            }
-        }
-        // Format indexer command config
-        if (isset($temp->indexer)) {
-            /** @var Config $indexerConf */
-            $indexerConf = $temp->indexer;
-            if ($indexerConf->count() > 0) {
-                $indexerConf = $indexerConf->toArray();
-                /** @var array $indexerConf */
-                $string .= 'indexer' . PHP_EOL . '{' . PHP_EOL;
-                $string .= implode(
-                    PHP_EOL,
-                    array_map(
-                        function ($key) use ($indexerConf) {
-                            return $key . ' = ' . $indexerConf[$key];
-                        },
-                        array_keys($indexerConf)
-                    )
-                );
-                $string .= PHP_EOL . '}' . PHP_EOL;
-            }
-        }
+        return $config;
+    }
 
-        // Store indexes config
-//        foreach ($temp as $key => $val) {
-//            var_dump($key);
-//            var_dump($val);
-//        }
-        // TODO: finish
+    /**
+     * @param Config $config
+     * @param string $command
+     * @return string
+     */
+    protected function getCommandConf(Config $config, $command)
+    {
+        $string = '';
+        if (isset($config['searchd'])) {
+            /** @var Config $conf */
+            $conf = $config['searchd'];
+            if ($conf->count() > 0) {
+                $conf = $conf->toArray();
+                /** @var array $conf */
+                $string .= $command . PHP_EOL . '{' . PHP_EOL;
+                $string .= implode(
+                    PHP_EOL,
+                    array_map(
+                        function ($key) use ($conf) {
+                            return $key . ' = ' . $conf[$key];
+                        },
+                        array_keys($conf)
+                    )
+                );
+                $string .= PHP_EOL . '}' . PHP_EOL;
+            }
+        }
         return $string;
     }
 

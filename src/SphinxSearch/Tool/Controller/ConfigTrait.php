@@ -30,7 +30,7 @@ trait ConfigTrait
         } else {
             $config = $config['sphinxsearch'];
             if (!is_null($file)) {
-                $config = Factory::fromFile($file, true)->toArray();
+                $config = array_merge($config['sphinxsearch'], Factory::fromFile($file, true)->toArray()); // FIXME: ?
             }
         }
         if (empty($config)) {

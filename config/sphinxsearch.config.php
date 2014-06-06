@@ -148,8 +148,10 @@ return [
 //        ]
     ],
     'indexes' => [
-//        'index_name' => [
-//        ],
+        'my_rt' => [
+            'path' => '{idx_path}my_rt',
+            'type' => 'rt'
+        ],
 //        'defaults' => [
 //            'type' => '',
 //            'source' => '',

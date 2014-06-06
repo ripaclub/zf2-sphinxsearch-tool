@@ -44,10 +44,4 @@ trait ConfigTrait
 
         return $config;
     }
-
-    protected function putConfig(Config $config, $file)
-    {
-
-    }
-    
 }

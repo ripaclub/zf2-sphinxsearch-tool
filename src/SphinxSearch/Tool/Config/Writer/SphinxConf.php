@@ -20,6 +20,22 @@ use Zend\Config\Writer\AbstractWriter;
 class SphinxConf extends AbstractWriter
 {
     /**
+     * @var array
+     */
+    protected $commands = [
+        'searchd' => 'searchd',
+        'indexer' => 'indexer'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $sections = [
+        'indexes' => 'index',
+        'sources' => 'source'
+    ];
+
+    /**
      * @param array $config
      * @return string
      */
@@ -30,11 +46,13 @@ class SphinxConf extends AbstractWriter
         // Substitute variables
         $config = $this->substituteVars($config);
         // Format searchd deamon config
-        $string .= $this->getCommandConf($config, 'searchd');
+        $string .= $this->getCommandConfig($config, $this->commands[0]);
         // Format indexer command config
-        $string .= $this->getCommandConf($config, 'indexer');
+        $string .= $this->getCommandConfig($config, $this->commands[1]);
         // TODO: Format indexes config
-
+        $string .= $this->getSectionConfig($config, $this->sections[0]);
+        // TODO: Format data source config
+//        $string .= $this->getConfig($config, $this->sections[1]);
         return $string;
     }
 
@@ -68,33 +86,57 @@ class SphinxConf extends AbstractWriter
     }
 
     /**
+     * Creates the config part of the specified command
+     *
      * @param Config $config
      * @param string $command
      * @return string
      */
-    protected function getCommandConf(Config $config, $command)
+    protected function getCommandConfig(Config $config, $command)
     {
         $string = '';
         if (isset($config[$command])) {
-            /** @var Config $conf */
-            $conf = $config[$command];
-            if ($conf->count() > 0) {
-                $conf = $conf->toArray();
-                /** @var array $conf */
-                $string .= $command . PHP_EOL . '{' . PHP_EOL;
+            /** @var Config $config */
+            $config = $config[$command];
+            if ($config->count() > 0) {
+                $config = $config->toArray();
+                /** @var array $config */
+                $string .= $this->commands[$command] . PHP_EOL . '{' . PHP_EOL;
                 $string .= implode(
-                    PHP_EOL,
+                    PHP_EOL . "\t",
                     array_map(
-                        function ($key) use ($conf) {
-                            return $key . ' = ' . $conf[$key];
+                        function ($key) use ($config) {
+                            return $key . ' = ' . $config[$key];
                         },
-                        array_keys($conf)
+                        array_keys($config)
                     )
                 );
                 $string .= PHP_EOL . '}' . PHP_EOL;
             }
         }
         return $string;
+    }
+
+    /**
+     * Creates the config parts of the specified section
+     *
+     * @param Config $config
+     * @param $section
+     * @return string
+     */
+    protected function getSectionConfig(Config $config, $section)
+    {
+        $string = '';
+        if (isset($config[$section])) {
+            /** @var Config $config */
+            $config = $config[$section];
+            if ($config->count() > 0) {
+                foreach ($config as $name => $values) {
+                    var_dump($name);
+                    var_dump($values);
+                }
+            }
+        }
     }
 
 } 

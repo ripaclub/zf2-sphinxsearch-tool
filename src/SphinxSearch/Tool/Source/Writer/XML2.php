@@ -10,9 +10,9 @@
  */
 namespace SphinxSearch\Tool\Source\Writer;
 
-use SphinxSearch\Tool\Writer\Exception\NotValidDocumentException;
-use SphinxSearch\Tool\Writer\Source\AttributesAwareTrait;
-use SphinxSearch\Tool\Writer\Source\FieldsAwareTrait;
+use SphinxSearch\Tool\Source\Exception\NotValidDocumentException;
+use SphinxSearch\Tool\Source\Writer\AttributesAwareTrait;
+use SphinxSearch\Tool\Source\Writer\FieldsAwareTrait;
 
 /**
  * Class XML2

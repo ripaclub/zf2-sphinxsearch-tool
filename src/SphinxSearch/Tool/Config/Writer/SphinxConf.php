@@ -146,9 +146,11 @@ class SphinxConf extends AbstractWriter
             if ($config->count() > 0) {
                 /** @var Config $values */
                 foreach ($config as $name => $values) {
-                    $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
-                    $string .= $this->getValuesString($values->toArray(), true);
-                    $string .= PHP_EOL . '}' . PHP_EOL;
+                    if ($values->count() > 0) {
+                        $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
+                        $string .= $this->getValuesString($values->toArray(), true);
+                        $string .= PHP_EOL . '}' . PHP_EOL;
+                    }
                 }
             }
         }

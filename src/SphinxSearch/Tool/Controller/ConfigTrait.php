@@ -10,6 +10,7 @@
  */
 namespace SphinxSearch\Tool\Controller;
 
+use Zend\Config\Config;
 use Zend\Config\Factory;
 
 /**
@@ -18,25 +19,24 @@ use Zend\Config\Factory;
 trait ConfigTrait
 {
     /**
-     * @param   string|null $file
-     * @return  array
+     * @param string|null $file
+     * @return Config
      */
     protected function getConfig($file = null)
     {
         // Config
-        $config = $this->getServiceLocator()->get('Config');
+        $appConfig = $this->getServiceLocator()->get('Config');
+
         if (!isset($config['sphinxsearch'])) {
             throw new \InvalidArgumentException('Config not found with name: ' . $config);
         } else {
-            $config = $config['sphinxsearch'];
-            print_r($config);
+            $config = new Config([], true);
+            $config->merge($config['sphinxsearch']); //defaults
+
             if (!is_null($file)) {
-                $config = array_merge($config, Factory::fromFile($file, true)->toArray()); // FIXME: ?
+                $fileConfig = Factory::fromFile($file, true);
+                $config->merge($fileConfig);
             }
-        }
-        print_r($config);
-        if (empty($config)) {
-            throw new \RuntimeException('Invalid configuration');
         }
 
         return $config;

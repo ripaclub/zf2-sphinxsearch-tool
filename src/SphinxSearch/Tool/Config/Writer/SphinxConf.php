@@ -67,7 +67,7 @@ class SphinxConf extends AbstractWriter
         // Format indexer command config
         if (isset($temp->indexer)) {
             /** @var Config $indexerConf */
-            $indexerConf = $temp->searchd;
+            $indexerConf = $temp->indexer;
             if ($indexerConf->count() > 0) {
                 $indexerConf = $indexerConf->toArray();
                 /** @var array $indexerConf */

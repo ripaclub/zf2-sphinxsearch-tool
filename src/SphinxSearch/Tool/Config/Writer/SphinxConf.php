@@ -84,7 +84,6 @@ class SphinxConf extends AbstractWriter
                 $string .= PHP_EOL . '}' . PHP_EOL;
             }
         }
-        echo $string;
 
         // Store indexes config
 //        foreach ($temp as $key => $val) {

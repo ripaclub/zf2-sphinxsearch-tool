@@ -47,7 +47,9 @@ class Module implements
     {
         $moduleConfig = include __DIR__ . '/config/module.config.php';
         $moduleConfig = array_merge($moduleConfig, include __DIR__ . '/config/routes.config.php');
-        if (file_exists(__DIR__ . '/config/sphinxsearch.config.php.dist')) {
+        if (file_exists(__DIR__ . '/config/sphinxsearch.config.php')) {
+            $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinxsearch.config.php';
+        } else if (file_exists(__DIR__ . '/config/sphinxsearch.config.php.dist')) {
             $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinxsearch.config.php.dist';
         }
         return $moduleConfig;

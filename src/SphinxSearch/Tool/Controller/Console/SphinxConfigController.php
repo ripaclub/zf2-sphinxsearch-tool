@@ -56,7 +56,7 @@ class SphinxConfigController extends AbstractActionController
 //        Factory::toFile('dev.conf', $config);
 
         $writer = new SphinxConf();
-        $writer->processConfig($config);
+        echo $writer->processConfig($config);
 
 
         return false;

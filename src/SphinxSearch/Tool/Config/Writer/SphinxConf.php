@@ -43,31 +43,48 @@ class SphinxConf extends AbstractWriter
         }
         // Remove variables node
         unset($temp->variables);
-        // Store daemons config
+        // Format searchd deamon config
         $string = '';
         if (isset($temp->searchd)) {
             /** @var Config $searchdConf */
             $searchdConf = $temp->searchd;
-            $searchdConf = $searchdConf->toArray();
-            /** @var array $searchdConf */
-            $string .= 'searchd';
-            $string .= PHP_EOL;
-            $string .= '{';
-            $string .= implode(
-                PHP_EOL,
-                array_map(
-                function ($key) use ($searchdConf) {
-                    return $key . ' = ' . $searchdConf[$key];
-                },
-                array_keys($searchdConf)
-                )
-            );
-            $string .= '}';
+            if ($searchdConf->count() > 0) {
+                $searchdConf = $searchdConf->toArray();
+                /** @var array $searchdConf */
+                $string .= 'searchd' . PHP_EOL . '{' . PHP_EOL;
+                $string .= implode(
+                    PHP_EOL,
+                    array_map(
+                        function ($key) use ($searchdConf) {
+                            return $key . ' = ' . $searchdConf[$key];
+                        },
+                        array_keys($searchdConf)
+                    )
+                );
+                $string .= PHP_EOL . '}' . PHP_EOL;
+            }
         }
-        echo $string . PHP_EOL;
-//        if (isset($temp->indexer)) {
-//
-//        }
+        // Format indexer command config
+        if (isset($temp->indexer)) {
+            /** @var Config $indexerConf */
+            $indexerConf = $temp->searchd;
+            if ($indexerConf->count() > 0) {
+                $indexerConf = $indexerConf->toArray();
+                /** @var array $indexerConf */
+                $string .= 'indexer' . PHP_EOL . '{' . PHP_EOL;
+                $string .= implode(
+                    PHP_EOL,
+                    array_map(
+                        function ($key) use ($indexerConf) {
+                            return $key . ' = ' . $indexerConf[$key];
+                        },
+                        array_keys($indexerConf)
+                    )
+                );
+                $string .= PHP_EOL . '}' . PHP_EOL;
+            }
+        }
+        echo $string;
 
         // Store indexes config
 //        foreach ($temp as $key => $val) {
@@ -75,7 +92,6 @@ class SphinxConf extends AbstractWriter
 //            var_dump($val);
 //        }
         // TODO: finish
-        $string = '';
         return $string;
     }
 

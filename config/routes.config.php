@@ -12,21 +12,21 @@ return [
     'console' => [
         'router' => [
             'routes' => [
-                'sphinxsearch-build-source' => [
-                    'options' => [
-                        'route' => 'sphinx source', // TODO: ?
-                        'defaults' => [
-                            'controller' => 'SphinxSearch\Tool\Controller\Console',
-                            'action' => 'source'
-                        ],
-                    ],
-                ],
+//                'sphinxsearch-build-source' => [
+//                    'options' => [
+//                        'route' => 'sphinx source', // TODO: ?
+//                        'defaults' => [
+//                            'controller' => 'SphinxSearch\Tool\Controller\Console',
+//                            'action' => 'source'
+//                        ],
+//                    ],
+//                ],
                 'sphinxsearch-show-config' => [
                     'options' => [
                         'route' => 'sphinx show config [--file=]',
                         'defaults' => [
-                            'controller' => 'SphinxSearch\Tool\Controller\Console',
-                            'action' => 'show-config'
+                            'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
+                            'action' => 'show'
                         ],
                     ],
                 ],
@@ -34,8 +34,8 @@ return [
                     'options' => [
                         'route' => 'sphinx print config [--file=]',
                         'defaults' => [
-                            'controller' => 'SphinxSearch\Tool\Controller\Console',
-                            'action' => 'print-config'
+                            'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
+                            'action' => 'print'
                         ],
                     ],
                 ],

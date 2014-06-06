@@ -8,16 +8,17 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tool\Controller;
+namespace SphinxSearch\Tool\Controller\Console;
 
-use SphinxSearch\Tool\Controller\CliTrait;
+use SphinxSearch\Tool\Controller\Traits\CliTrait;
+use SphinxSearch\Tool\Controller\Traits\ConfigTrait;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
- * Class ConsoleController
+ * Class SphinxConfigController
  */
-class ConsoleController extends AbstractActionController
+class SphinxConfigController extends AbstractActionController
 {
     use CliTrait;
     use ConfigTrait;
@@ -37,14 +38,5 @@ class ConsoleController extends AbstractActionController
     public function printConfigAction()
     {
 
-    }
-
-    /**
-     * @return bool
-     */
-    public function sourceAction()
-    {
-        // TODO: build source
-        return false;
     }
 }

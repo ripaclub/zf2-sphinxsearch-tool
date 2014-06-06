@@ -8,7 +8,7 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tool\Controller;
+namespace SphinxSearch\Tool\Controller\Traits;
 
 use Zend\Console\Console;
 use Zend\Console\Exception\RuntimeException as ConsoleRuntimeException;

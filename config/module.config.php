@@ -11,10 +11,10 @@
 return [
     'controllers' => [
         'invokables' => [
-            'SphinxSearch\Tool\Controller\Console' => 'SphinxSearch\Tool\Controller\ConsoleController'
+            'SphinxSearch\Tool\Controller\Console\SphinxConfig' => 'SphinxSearch\Tool\Controller\Console\SphinxConfigController'
         ]
     ],
     'view_manager' => [
-        'display_not_found_reason' => true
+        'display_not_found_reason' => false
     ]
 ];

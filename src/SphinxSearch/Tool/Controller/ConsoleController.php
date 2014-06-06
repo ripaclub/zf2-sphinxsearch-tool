@@ -11,6 +11,7 @@
 namespace SphinxSearch\Tool\Controller;
 
 use SphinxSearch\Tool\Controller\CliTrait;
+use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -26,7 +27,10 @@ class ConsoleController extends AbstractActionController
      */
     public function configAction()
     {
-        print_r($this->getConfig());
+        /** @var Request $request */
+        $request = $this->getRequest();
+        $filename = $request->getParam('file');
+        print_r($this->getConfig($filename));
         return false;
     }
 

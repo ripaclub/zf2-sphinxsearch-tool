@@ -23,7 +23,7 @@ return [
                 ],
                 'sphinxsearch-build-config' => [
                     'options' => [
-                        'route' => 'config', // TODO: finish
+                        'route' => 'config [--file=]', // TODO: finish
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tool\Controller\Console',
                             'action' => 'config'

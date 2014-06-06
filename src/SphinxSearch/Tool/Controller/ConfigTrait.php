@@ -30,10 +30,9 @@ trait ConfigTrait
         } else {
             $config = $config['sphinxsearch'];
             if (!is_null($file)) {
-                $config = Factory::fromFile($file, true);
+                $config = Factory::fromFile($file, true)->toArray();
             }
         }
-        var_dump($config);
         if (empty($config)) {
             throw new \RuntimeException('Invalid configuration');
         }

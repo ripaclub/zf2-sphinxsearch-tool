@@ -53,11 +53,14 @@ class SphinxConf extends AbstractWriter
             $string .= 'searchd';
             $string .= PHP_EOL;
             $string .= '{';
-            $string .= array_map(
+            $string .= implode(
+                PHP_EOL,
+                array_map(
                 function ($key) use ($searchdConf) {
-                    return $key . ' = ' . $searchdConf[$key] . PHP_EOL;
+                    return $key . ' = ' . $searchdConf[$key];
                 },
                 array_keys($searchdConf)
+                )
             );
             $string .= '}';
         }

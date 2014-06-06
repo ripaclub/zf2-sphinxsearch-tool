@@ -75,9 +75,9 @@ class SphinxConf extends AbstractWriter
     protected function getCommandConf(Config $config, $command)
     {
         $string = '';
-        if (isset($config['searchd'])) {
+        if (isset($config[$command])) {
             /** @var Config $conf */
-            $conf = $config['searchd'];
+            $conf = $config[$command];
             if ($conf->count() > 0) {
                 $conf = $conf->toArray();
                 /** @var array $conf */

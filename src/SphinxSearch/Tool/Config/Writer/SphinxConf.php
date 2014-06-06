@@ -48,15 +48,15 @@ class SphinxConf extends AbstractWriter
      */
     protected function substituteVars(Config $config, $prefix = '{', $suffix = '}')
     {
-        $config = $config->toArray();
-        if (isset($config['variables'])) {
+        $arrayConfig = $config->toArray();
+        if (isset($arrayConfig['variables'])) {
             $vars = array_map(
                 function ($x) use ($prefix, $suffix) {
                     return $prefix . $x . $suffix;
                 },
-                array_keys($config['variables'])
+                array_keys($arrayConfig['variables'])
             );
-            $vals = array_values($config['variables']);
+            $vals = array_values($arrayConfig['variables']);
             $tokens = array_combine($vars, $vals);
             $processor = new Token();
             $processor->setTokens($tokens);

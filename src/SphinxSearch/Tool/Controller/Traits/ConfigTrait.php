@@ -33,13 +33,21 @@ trait ConfigTrait
             throw new \InvalidArgumentException('Config not found with name: "sphinxsearch"');
         } else {
             $config = new Config($appConfig['sphinxsearch'], true); // defaults
-
             if (!is_null($file)) {
                 $fileConfig = Factory::fromFile($file, true);
-                $config->merge($fileConfig);
+                if (!isset($fileConfig['sphinxsearch'])) {
+                    throw new \InvalidArgumentException('Config not found with name: "sphinxsearch"');
+                }
+                $config->merge($fileConfig['sphinxsearch']);
             }
         }
 
         return $config;
     }
+
+    protected function putConfig(Config $config, $file)
+    {
+
+    }
+    
 }

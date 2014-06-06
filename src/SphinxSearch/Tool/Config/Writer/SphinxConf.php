@@ -20,11 +20,13 @@ class SphinxConf extends AbstractWriter
 
     /**
      * @param array $config
-     * @return string|void
+     * @return string
      */
     public function processConfig(array $config)
     {
+        $string = '';
 
+        return $string;
     }
 
 } 

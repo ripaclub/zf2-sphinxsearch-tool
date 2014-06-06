@@ -12,7 +12,6 @@ namespace SphinxSearch\Tool\Controller\Console;
 
 use SphinxSearch\Tool\Controller\Traits\CliTrait;
 use SphinxSearch\Tool\Controller\Traits\ConfigTrait;
-use Zend\Console\ColorInterface;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -25,7 +24,7 @@ class SphinxConfigController extends AbstractActionController
     use ConfigTrait;
 
     /**
-     * @return bool
+     * @return mixed
      */
     public function showAction()
     {
@@ -37,17 +36,25 @@ class SphinxConfigController extends AbstractActionController
         $config = $this->getConfig($filename)->toArray();
         // Show configuration
         $console = $this->getConsole();
-        $console->writeLine(var_export($config));
-        return false;
+        return var_export($config) . PHP_EOL;
     }
 
+    /**
+     * @return bool
+     */
     public function printAction()
     {
-        // TODO
+        // Retrieve parameters
+        /** @var Request $request */
+        $request = $this->getRequest();
+        $filename = $request->getParam('file');
+        // Retrieve configuration
+        $config = $this->getConfig($filename);
 
-        print_r($this->getServiceLocator()->get('config'));
-        $console = $this->getConsole();
-        $console->writeLine('TO BE DONE', ColorInterface::RED);
+//        Factory::registerWriter('conf', new SphinxConf());
+//        Factory::toFile('dev.conf', $config);
+
+
         return false;
     }
 }

@@ -8,7 +8,7 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tool\Writer\Source;
+namespace SphinxSearch\Tool\Source\Writer;
 
 use SphinxSearch\Tool\Writer\Exception\NotValidDocumentException;
 use SphinxSearch\Tool\Writer\Source\AttributesAwareTrait;

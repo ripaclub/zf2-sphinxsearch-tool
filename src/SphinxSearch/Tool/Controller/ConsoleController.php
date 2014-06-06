@@ -25,13 +25,18 @@ class ConsoleController extends AbstractActionController
     /**
      * @return bool
      */
-    public function configAction()
+    public function showConfigAction()
     {
         /** @var Request $request */
         $request = $this->getRequest();
         $filename = $request->getParam('file');
-        print_r($this->getConfig($filename)->toArray());
-        return false;
+        // print_r($this->getConfig($filename)->toArray());
+        return $this->getConfig($filename)->toArray(); //false;
+    }
+
+    public function printConfigAction()
+    {
+
     }
 
     /**

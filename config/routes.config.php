@@ -21,12 +21,21 @@ return [
                         ],
                     ],
                 ],
-                'sphinxsearch-build-config' => [
+                'sphinxsearch-show-config' => [
                     'options' => [
-                        'route' => 'sphinx config [--file=]', // TODO: finish
+                        'route' => 'sphinx show config [--file=]',
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tool\Controller\Console',
-                            'action' => 'config'
+                            'action' => 'show-config'
+                        ],
+                    ],
+                ],
+                'sphinxsearch-print-config' => [
+                    'options' => [
+                        'route' => 'sphinx print config [--file=]',
+                        'defaults' => [
+                            'controller' => 'SphinxSearch\Tool\Controller\Console',
+                            'action' => 'print-config'
                         ],
                     ],
                 ],

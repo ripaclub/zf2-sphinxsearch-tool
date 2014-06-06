@@ -8,25 +8,25 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD Licens
  */
-namespace SphinxSearch\Tool\Writer\Source;
+namespace SphinxSearch\Tool\Source\Writer;
 
 /**
- * Class AttributesAwareTrait
+ * Class FieldsAwareTrait
  */
-trait AttributesAwareTrait
+trait FieldsAwareTrait
 {
     /**
      * @var array
      */
-    protected $attributes = [];
+    protected $fields = [];
 
     /**
-     * Set the source attributes
+     * Set the source fields
      *
-     * @param $attributes
+     * @param $fields
      */
-    public function setAttributes($attributes)
+    public function setFields($fields)
     {
-        $this->attributes = $attributes;
+        $this->fields = $fields;
     }
 }

@@ -26,7 +26,7 @@ return [
                         'route' => 'sphinx show config [--file=]',
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
-                            'action' => 'show'
+                            'action' => 'show',
                         ],
                     ],
                 ],
@@ -35,7 +35,7 @@ return [
                         'route' => 'sphinx print config [--file=]',
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
-                            'action' => 'print'
+                            'action' => 'print',
                         ],
                     ],
                 ],

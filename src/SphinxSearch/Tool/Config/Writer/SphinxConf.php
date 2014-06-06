@@ -41,11 +41,33 @@ class SphinxConf extends AbstractWriter
             $processor->setTokens($tokens);
             $processor->process($temp);
         }
-        //
-        foreach ($temp as $key => $val) {
-            var_dump($key);
-            var_dump($val);
+        // Remove variables node
+        unset($temp->variables);
+        // Store daemons config
+        $string = '';
+        if (isset($temp->searchd)) {
+            $array = $temp->searchd;
+            $string .= 'searchd';
+            $string .= PHP_EOL;
+            $string .= '{';
+            $string .= array_map(
+                function ($key) use ($array) {
+                    return $key . ' = ' . $array[$key] . PHP_EOL;
+                },
+                array_keys($array)
+            );
+            $string .= '}';
         }
+        echo $string . PHP_EOL;
+//        if (isset($temp->indexer)) {
+//
+//        }
+
+        // Store indexes config
+//        foreach ($temp as $key => $val) {
+//            var_dump($key);
+//            var_dump($val);
+//        }
         // TODO: finish
         $string = '';
         return $string;

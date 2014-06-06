@@ -19,6 +19,8 @@ use Zend\Config\Factory;
 trait ConfigTrait
 {
     /**
+     * Retrieve the config of sphinxsearch node
+     *
      * @param string|null $file
      * @return Config
      */
@@ -30,8 +32,7 @@ trait ConfigTrait
         if (!isset($appConfig['sphinxsearch'])) {
             throw new \InvalidArgumentException('Config not found with name: "sphinxsearch"');
         } else {
-            $config = new Config([], true);
-            $config->merge($appConfig['sphinxsearch']); // defaults
+            $config = new Config($appConfig['sphinxsearch'], true); // defaults
 
             if (!is_null($file)) {
                 $fileConfig = Factory::fromFile($file, true);

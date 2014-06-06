@@ -27,11 +27,11 @@ trait ConfigTrait
         // Config
         $appConfig = $this->getServiceLocator()->get('Config');
 
-        if (!isset($config['sphinxsearch'])) {
-            throw new \InvalidArgumentException('Config not found with name: ' . $config);
+        if (!isset($appConfig['sphinxsearch'])) {
+            throw new \InvalidArgumentException('Config not found with name: "sphinxsearch"');
         } else {
             $config = new Config([], true);
-            $config->merge($config['sphinxsearch']); //defaults
+            $config->merge($appConfig['sphinxsearch']); // defaults
 
             if (!is_null($file)) {
                 $fileConfig = Factory::fromFile($file, true);

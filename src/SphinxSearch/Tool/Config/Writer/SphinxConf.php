@@ -49,10 +49,11 @@ class SphinxConf extends AbstractWriter
         $string .= $this->getCommandConfig($config, 'searchd');
         // Format indexer command config
         $string .= $this->getCommandConfig($config, 'indexer');
-        // TODO: Format indexes config
+        // Format indexes config
         $string .= $this->getSectionConfig($config, 'indexes');
-        // TODO: Format data source config
-//        $string .= $this->getConfig($config, 'sources');
+        // Format data source config
+        $string .= $this->getSectionConfig($config, 'sources');
+
         return $string;
     }
 
@@ -101,20 +102,32 @@ class SphinxConf extends AbstractWriter
             if ($config->count() > 0) {
                 $config = $config->toArray();
                 /** @var array $config */
-                $string .= $this->commands[$command] . PHP_EOL . '{' . PHP_EOL;
-                $string .= implode(
-                    PHP_EOL . "\t",
-                    array_map(
-                        function ($key) use ($config) {
-                            return $key . ' = ' . $config[$key];
-                        },
-                        array_keys($config)
-                    )
-                );
+                $string .= $this->commands[$command] . PHP_EOL . '{' . PHP_EOL . "\t";
+                $string .= $this->getValuesString($config, true);
                 $string .= PHP_EOL . '}' . PHP_EOL;
             }
         }
         return $string;
+    }
+
+    /**
+     * Construct a string representation from configuration associative values
+     *
+     * @param array $values
+     * @param bool $tab
+     * @return string
+     */
+    private function getValuesString(array $values, $tab = true)
+    {
+        return implode(
+            ($tab ? PHP_EOL . "\t" : PHP_EOL),
+            array_map(
+                function ($key) use ($values) {
+                    return $key . ' = ' . $values[$key];
+                },
+                array_keys($values)
+            )
+        );
     }
 
     /**
@@ -132,8 +145,9 @@ class SphinxConf extends AbstractWriter
             $config = $config[$section];
             if ($config->count() > 0) {
                 foreach ($config as $name => $values) {
-                    var_dump($name);
-                    var_dump($values);
+                    $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
+                    $string .= $this->getValuesString($values, true);
+                    $string .= PHP_EOL . '}' . PHP_EOL;
                 }
             }
         }

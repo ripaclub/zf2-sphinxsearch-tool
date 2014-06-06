@@ -1,5 +1,5 @@
-Sphinx Search Tool [![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-sphinxsearch-tool)](https://github.com/igrigorik/ga-beacon)
-=======================
+Sphinx Search Tool
+==================
 
 An utility that provides a set of tools to configure and handle Sphinx Search engine.
 
@@ -44,3 +44,7 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
 ```
 4. Run a `composer update`
 5. Execute the `sphinx-tool.php`
+
+---
+
+[![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-sphinxsearch-tool)](https://github.com/igrigorik/ga-beacon)

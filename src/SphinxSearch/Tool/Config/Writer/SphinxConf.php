@@ -46,20 +46,22 @@ class SphinxConf extends AbstractWriter
         // Store daemons config
         $string = '';
         if (isset($temp->searchd)) {
-            echo get_class($temp->searchd) . PHP_EOL;
-//            $array = $temp->searchd;
-//            $string .= 'searchd';
-//            $string .= PHP_EOL;
-//            $string .= '{';
-//            $string .= array_map(
-//                function ($key) use ($array) {
-//                    return $key . ' = ' . $array[$key] . PHP_EOL;
-//                },
-//                array_keys($array)
-//            );
-//            $string .= '}';
+            /** @var Config $searchdConf */
+            $searchdConf = $temp->searchd;
+            $searchdConf = $searchdConf->toArray();
+            /** @var array $searchdConf */
+            $string .= 'searchd';
+            $string .= PHP_EOL;
+            $string .= '{';
+            $string .= array_map(
+                function ($key) use ($searchdConf) {
+                    return $key . ' = ' . $searchdConf[$key] . PHP_EOL;
+                },
+                array_keys($searchdConf)
+            );
+            $string .= '}';
         }
-//        echo $string . PHP_EOL;
+        echo $string . PHP_EOL;
 //        if (isset($temp->indexer)) {
 //
 //        }

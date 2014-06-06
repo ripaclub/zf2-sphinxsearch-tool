@@ -10,6 +10,7 @@
  */
 namespace SphinxSearch\Tool\Controller\Console;
 
+use SphinxSearch\Tool\Config\Writer\SphinxConf;
 use SphinxSearch\Tool\Controller\Traits\CliTrait;
 use SphinxSearch\Tool\Controller\Traits\ConfigTrait;
 use Zend\Console\Request;
@@ -49,10 +50,13 @@ class SphinxConfigController extends AbstractActionController
         $request = $this->getRequest();
         $filename = $request->getParam('file');
         // Retrieve configuration
-        $config = $this->getConfig($filename);
+        $config = $this->getConfig($filename)->toArray();
 
 //        Factory::registerWriter('conf', new SphinxConf());
 //        Factory::toFile('dev.conf', $config);
+
+        $writer = new SphinxConf();
+        $writer->processConfig($config);
 
 
         return false;

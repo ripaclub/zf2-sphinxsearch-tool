@@ -40,6 +40,7 @@ class SphinxConf extends AbstractWriter
             $processor->setTokens($tokens);
             $processor->process($temp);
         }
+        print_r($temp);
         // TODO: finish
         $string = '';
         return $string;

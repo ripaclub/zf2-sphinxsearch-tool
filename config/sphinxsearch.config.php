@@ -11,7 +11,7 @@
 return [
     'variables' => [
         'log_path'      => '/var/log/sphinx/',
-        'lib_path'      => '/var/lib/sphinx/',
+        'lib_path' => '/var/lib/sphinx',
         'run_path'      => '/var/run/sphinx/',
         'idx_path'      => '/var/idx/sphinx/',
     ],

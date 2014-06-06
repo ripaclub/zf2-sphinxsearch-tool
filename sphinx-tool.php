@@ -10,7 +10,6 @@
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
 $basePath = getcwd();
-
 ini_set('user_agent', 'SphinxSearch Tool');
 
 // load autoloader

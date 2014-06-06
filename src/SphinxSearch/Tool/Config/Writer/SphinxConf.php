@@ -27,6 +27,7 @@ class SphinxConf extends AbstractWriter
     public function processConfig(array $config)
     {
         $temp = new Config($config, true);
+        // Substitute variables
         if (isset($config['variables'])) {
             $vars = array_map(
                 function ($x) {
@@ -40,7 +41,11 @@ class SphinxConf extends AbstractWriter
             $processor->setTokens($tokens);
             $processor->process($temp);
         }
-        print_r($temp);
+        //
+        foreach ($temp as $key => $val) {
+            var_dump($key);
+            var_dump($val);
+        }
         // TODO: finish
         $string = '';
         return $string;

@@ -17,7 +17,8 @@ return [
     ],
     'searchd' => [
         'listen' => '9306:mysql41',
-        'port' => 9306,
+//        'port' => 9306,
+
         'log' => '{log_path}searchd.log',
         'query_log' => '{log_path}query.log',
 //        'query_log_format' => '',

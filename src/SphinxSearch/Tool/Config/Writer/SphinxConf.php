@@ -46,13 +46,13 @@ class SphinxConf extends AbstractWriter
         // Substitute variables
         $config = $this->substituteVars($config);
         // Format searchd deamon config
-        $string .= $this->getCommandConfig($config, $this->commands[0]);
+        $string .= $this->getCommandConfig($config, 'searchd');
         // Format indexer command config
-        $string .= $this->getCommandConfig($config, $this->commands[1]);
+        $string .= $this->getCommandConfig($config, 'indexer');
         // TODO: Format indexes config
-        $string .= $this->getSectionConfig($config, $this->sections[0]);
+        $string .= $this->getSectionConfig($config, 'indexes');
         // TODO: Format data source config
-//        $string .= $this->getConfig($config, $this->sections[1]);
+//        $string .= $this->getConfig($config, 'sources');
         return $string;
     }
 
@@ -137,6 +137,6 @@ class SphinxConf extends AbstractWriter
                 }
             }
         }
+        return $string;
     }
-
-} 
+}

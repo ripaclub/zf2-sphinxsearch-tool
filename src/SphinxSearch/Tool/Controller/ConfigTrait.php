@@ -29,10 +29,12 @@ trait ConfigTrait
             throw new \InvalidArgumentException('Config not found with name: ' . $config);
         } else {
             $config = $config['sphinxsearch'];
+            print_r($config);
             if (!is_null($file)) {
-                $config = array_merge($config['sphinxsearch'], Factory::fromFile($file, true)->toArray()); // FIXME: ?
+                $config = Factory::fromFile($file, true)->toArray(); // FIXME: ?
             }
         }
+        print_r($config);
         if (empty($config)) {
             throw new \RuntimeException('Invalid configuration');
         }

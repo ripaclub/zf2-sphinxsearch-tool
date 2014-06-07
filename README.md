@@ -20,14 +20,14 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
 
 ## Installation
 
-### Standalone installation using [Composer](http://getcomposer.org)
+### Standalone installation using [composer](http://getcomposer.org)
 
  1. Open console (command prompt)
  2. `git clone https://github.com/ripaclub/zf2-sphinxsearch-tool.git`
  3. `cd zf2-sphinxsearch-tool`
  4. Run `composer install`
 
-### Installation as ZF2 module using [Composer](http://getcomposer.org)
+### Installation as ZF2 module using [composer](http://getcomposer.org)
 
  1. Open console (command prompt)
  2. Go to your application's directory
@@ -71,6 +71,8 @@ Also, you can directly write the configuration in the Sphinx Search format.
 `php -f sphinx-tool.php print config --output=config/sphinx.dev.conf`
 
 `php -f sphinx-tool.php print config --input=sphinx.conf.php --output=config/sphinx.dev.conf`
+
+If you use ZF2 Sphinx Search Tool as a module included into your application you can call its actions from your application entry point.
 
 ### Configuration examples
 

@@ -62,15 +62,17 @@ You can output (as array) to your console the Sphinx Search settings stored in t
 
 The Sphinx Search settings here specified will be merged with the default settings contained in ZF2 Sphinx Search Tool.
 
-`php -f sphinx-tool.php show config`
-
-`php -f sphinx-tool.php show config --file=sphinx.conf.php`
+```sh
+php -f sphinx-tool.php show config
+php -f sphinx-tool.php show config --file=sphinx.conf.php
+```
 
 Also, you can directly write the configuration in the Sphinx Search format.
 
-`php -f sphinx-tool.php print config --output=config/sphinx.dev.conf`
-
-`php -f sphinx-tool.php print config --input=sphinx.conf.php --output=config/sphinx.dev.conf`
+```sh
+php -f sphinx-tool.php print config --output=config/sphinx.dev.conf
+php -f sphinx-tool.php print config --input=sphinx.conf.php --output=config/sphinx.dev.conf
+```
 
 If you use ZF2 Sphinx Search Tool as a module included into your application you can call its actions from your application entry point.
 

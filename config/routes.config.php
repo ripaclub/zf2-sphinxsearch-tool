@@ -12,15 +12,6 @@ return [
     'console' => [
         'router' => [
             'routes' => [
-//                'sphinxsearch-build-source' => [
-//                    'options' => [
-//                        'route' => 'sphinx source', // TODO: ?
-//                        'defaults' => [
-//                            'controller' => 'SphinxSearch\Tool\Controller\Console',
-//                            'action' => 'source'
-//                        ],
-//                    ],
-//                ],
                 'sphinxsearch-show-config' => [
                     'options' => [
                         'route' => 'sphinx show config [--file=]',
@@ -32,7 +23,7 @@ return [
                 ],
                 'sphinxsearch-print-config' => [
                     'options' => [
-                        'route' => 'sphinx print config [--file=]',
+                        'route' => 'sphinx print config --file= [--nolock]',
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
                             'action' => 'print',

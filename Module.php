@@ -63,7 +63,7 @@ class Module implements
         $figlet = new Figlet(['font' => __DIR__ . '/assets/font/colossal.flf']);
         $figlet->setOutputWidth($console->getWidth());
         $figlet->setJustification(Figlet::JUSTIFICATION_CENTER);
-        return PHP_EOL . $figlet->render('Sphinx Search Tools');
+        return PHP_EOL . $figlet->render('Sphinx Search Tool');
     }
 
     /**

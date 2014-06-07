@@ -29,18 +29,18 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
  3. Add the following to your **composer.json**
 
 ```json
-"require": {
-    "ripaclub/zf2-sphinxsearch-tool": "dev-develop"
+{
+    ...,
+    "require": {
+        "ripaclub/zf2-sphinxsearch-tool": "dev-develop"
+    },
+    "repositories": [
+        {
+        "type": "vcs",
+        "url": "https://github.com/ripaclub/zf2-sphinxsearch-tool.git"
+        }
+    ]
 }
-```
-
-```json
-"repositories": [
-    {
-    "type": "vcs",
-    "url": "https://github.com/ripaclub/zf2-sphinxsearch-tool.git"
-    }
-]
 ```
 4. Run a `composer update`
 5. Execute the `sphinx-tool.php`

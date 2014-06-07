@@ -52,7 +52,6 @@ class SphinxConfigController extends AbstractActionController
         $input = $request->getParam('input');
         $output = $request->getParam('output');
         $elock = !$request->getParam('nolock', false);
-        echo 'exclusive lock? ' . ($elock ? 'yes' : 'no') . PHP_EOL; // FIXME: remove
         // Retrieve configuration
         $config = $this->getConfig($input)->toArray();
         // Write configuration

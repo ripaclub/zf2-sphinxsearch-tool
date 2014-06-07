@@ -3,7 +3,7 @@ Sphinx Search Tool
 
 ![Help message](help-img.png "Help message")
 
-An utility that provides a set of tools to configure and handle Sphinx Search configurations and sources.
+An utility that provides a set of tools to **create** and handle **Sphinx Search configurations** and **sources**.
 
 The main purpose is to provide an automated way to build a Sphinx Search configuration starting from a ZF2 configuration file.
 

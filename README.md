@@ -7,6 +7,8 @@ The main purpose is to provide an automated way to build a Sphinx Search configu
 
 It runs from the command line as standalone CLI tool or can be installed as a ZF2 module.
 
+![Help message](help-img.png "Help message")
+
 ## References
 
 - [Sphinx Search configuration options](http://sphinxsearch.com/docs/current.html#conf-reference)
@@ -54,9 +56,7 @@ The entry point of the tool is the `sphinx-tool.php` file.
 
 So executing it without commands, i.e. `php -f sphinx-tool.php`, the help message will be shown.
 
-![Help message](help-img.png "Help message")
-
-The usage of this tool is now self-explanatory.
+The usage of this tool is self-explanatory.
 
 You can output (as array) to your console the Sphinx Search settings stored in the ZF2 configuration files (e.g. `module.config.php`) or in an external configuration file (e.g. `sphinx.conf.php`).
 

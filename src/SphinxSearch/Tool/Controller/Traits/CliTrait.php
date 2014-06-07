@@ -8,9 +8,9 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tool\Controller;
+namespace SphinxSearch\Tool\Controller\Traits;
 
-use Zend\Console\Console;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
 use Zend\Console\Exception\RuntimeException as ConsoleRuntimeException;
 
 /**
@@ -19,13 +19,16 @@ use Zend\Console\Exception\RuntimeException as ConsoleRuntimeException;
 trait CliTrait
 {
     /**
-     * @return Console
-     * @throws \RuntimeException
+     * Retrieve the console adapter
+     *
+     * @return ConsoleAdapter
+     * @throws ConsoleRuntimeException
      */
     public function getConsole()
     {
+        /** @var ConsoleAdapter $console */
         $console = $this->getServiceLocator()->get('console');
-        if (!$console instanceof Console) {
+        if (!$console instanceof ConsoleAdapter) {
             throw new ConsoleRuntimeException('Can not obtain a console adapter');
         }
         return $console;

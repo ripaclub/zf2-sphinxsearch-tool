@@ -8,26 +8,25 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-
 return [
     'console' => [
         'router' => [
             'routes' => [
-                'sphinxsearch-build-source' => [
+                'sphinxsearch-show-config' => [
                     'options' => [
-                        'route' => 'source', // 'sphinx build source', // TODO: finish
+                        'route' => 'sphinx show config [--file=]',
                         'defaults' => [
-                            'controller' => 'SphinxSearch\Tool\Controller\Console',
-                            'action' => 'source'
+                            'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
+                            'action' => 'show',
                         ],
                     ],
                 ],
-                'sphinxsearch-build-config' => [
+                'sphinxsearch-print-config' => [
                     'options' => [
-                        'route' => 'config', // TODO: finish
+                        'route' => 'sphinx print config [--input=] --output= [--nolock]',
                         'defaults' => [
-                            'controller' => 'SphinxSearch\Tool\Controller\Console',
-                            'action' => 'config'
+                            'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
+                            'action' => 'print',
                         ],
                     ],
                 ],

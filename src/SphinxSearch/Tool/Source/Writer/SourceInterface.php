@@ -8,7 +8,7 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tool\Writer\Source;
+namespace SphinxSearch\Tool\Source\Writer;
 
 /**
  * Interface SourceInterface
@@ -40,7 +40,7 @@ interface SourceInterface
      * If the document does not contain an identifier (i.e., element with id key) it throws an exception
      *
      * @param array $doc
-     * @throws \SphinxSearch\Tool\Writer\Exception\NotValidDocumentException
+     * @throws \SphinxSearch\Tool\Source\Exception\NotValidDocumentException
      * @return string The current buffer as a string
      */
     public function addDocument(array $doc);

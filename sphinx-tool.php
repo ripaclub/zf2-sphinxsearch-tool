@@ -10,7 +10,6 @@
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
 $basePath = getcwd();
-
 ini_set('user_agent', 'SphinxSearch Tool');
 
 // load autoloader
@@ -48,10 +47,5 @@ if (file_exists("$basePath/config/application.config.php")) {
         ],
     ];
 }
-
-if (file_exists("$basePath/config/sphinxsearch-tool.config.php")) {
-    $appConfig['sphinxsearch_tool'] = require "$basePath/config/sphinxsearch-tool.config.php";
-}
-
 
 Zend\Mvc\Application::init($appConfig)->run();

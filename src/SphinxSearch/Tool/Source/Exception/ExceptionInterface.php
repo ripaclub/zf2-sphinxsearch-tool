@@ -8,11 +8,11 @@
  *              Leonardo Grasso <me at leonardograsso dot com>
  * @license     http://opensource.org/licenses/BSD-2-Clause Simplified BSD License
  */
-namespace SphinxSearch\Tool\Writer\Exception;
+namespace SphinxSearch\Tool\Source\Exception;
 
 /**
- * Class NotValidDocumentException
+ * Interface ExceptionInterface
  */
-class NotValidDocumentException extends \InvalidArgumentException implements ExceptionInterface
+interface ExceptionInterface
 {
 }

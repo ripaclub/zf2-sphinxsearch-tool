@@ -29,7 +29,7 @@ class Module implements
     /**
      * @var bool
      */
-    private static $consoleBannerEnabled = true;
+    private static $consoleBannerEnabled = false;
 
     /**
      * @param bool $enable

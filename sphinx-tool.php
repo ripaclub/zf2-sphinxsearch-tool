@@ -30,10 +30,9 @@ if (file_exists("$basePath/config/application.config.php")) {
     if (!isset($appConfig['modules']['SphinxSearch\Tool'])) {
         $appConfig['modules'][] = 'SphinxSearch\Tool';
         $appConfig['module_listener_options']['module_paths']['SphinxSearch\Tool'] = __DIR__;
-    } else {
-        \SphinxSearch\Tool\Module::setConsoleBannerEnabled(false);
     }
 } else {
+    \SphinxSearch\Tool\Module::setConsoleBannerEnabled();
     $appConfig = [
         'modules' => [
             'SphinxSearch\Tool',

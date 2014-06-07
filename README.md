@@ -7,7 +7,7 @@ An utility that provides a set of tools to **create** and handle **Sphinx Search
 
 The main purpose is to provide an automated way to build a Sphinx Search configuration starting from a ZF2 configuration.
 
-Note tha this tool provides also a variable substitutions mechanism (see [here](#configuration)).
+Note tha this tool provides also a **variable substitutions mechanism** (see [here](#configuration)).
 
 It runs from the command line as standalone CLI tool or can be installed as a ZF2 module.
 
@@ -82,9 +82,15 @@ If you use ZF2 Sphinx Search Tool as a module included into your application you
 
 ### Configuration
 
-A Sphinx Search configuration can be defined via the `sphinxsearch` node element into you ZF2 configurations.
+A Sphinx Search configuration can be defined via the `sphinxsearch` node element into you ZF2 configurations. The children of this node will be merged (i.e., added or substituted to) with defaults provided by ZF2 Sphinx Search Tool.
 
 It can have this children:
+
+- `variables`
+
+    This node contains the variables that will be substituted into all your Sphinx Search configuration options.
+    The default variables are `log_path`, `lib_path`, `run_path`, and `idx_path` (respectively set to `/var/log/sphinx/`, `/var/lib/sphinx`, `/var/run/sphinx/`, and `/var/idx/sphinx/`).
+    You can define your variables (or override the defaults) and use them into your other settings wrapping them inside brackets.
 
 - `searchd`
 
@@ -103,11 +109,6 @@ It can have this children:
 
     This node contains the configurations of you data source as an associative array which keys corresponds to source names.
     For each data source you define you have to specifiy its [options](http://sphinxsearch.com/docs/current.html#confgroup-source)
-    
-- `variables`
-
-    This node contains the variables that will be substituted into all your Sphinx Search configuration options.
-    The default variables are `log_path`, `lib_path`, `run_path`, and `idx_path` (respectively set to `/var/log/sphinx/`, `/var/lib/sphinx`, `/var/run/sphinx/`, and `/var/idx/sphinx/`)
     
 #### Example
 

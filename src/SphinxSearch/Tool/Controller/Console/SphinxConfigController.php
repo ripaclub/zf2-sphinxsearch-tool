@@ -49,14 +49,15 @@ class SphinxConfigController extends AbstractActionController
         // Retrieve parameters
         /** @var Request $request */
         $request = $this->getRequest();
-        $filename = $request->getParam('file');
+        $input = $request->getParam('input');
+        $output = $request->getParam('output');
         $elock = !$request->getParam('nolock', false);
         echo 'exclusive lock? ' . ($elock ? 'yes' : 'no') . PHP_EOL; // FIXME: remove
         // Retrieve configuration
-        $config = $this->getConfig($filename)->toArray();
+        $config = $this->getConfig($input)->toArray();
         // Write configuration
         $writer = new SphinxConf();
-        $writer->toFile($filename, $config, $elock);
+        $writer->toFile($output, $config, $elock);
 
         return false;
     }

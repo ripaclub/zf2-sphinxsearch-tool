@@ -23,7 +23,7 @@ return [
                 ],
                 'sphinxsearch-print-config' => [
                     'options' => [
-                        'route' => 'sphinx print config --file= [--nolock]',
+                        'route' => 'sphinx print config [--input=] --output= [--nolock]',
                         'defaults' => [
                             'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
                             'action' => 'print',

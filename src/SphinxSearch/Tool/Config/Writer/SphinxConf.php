@@ -23,8 +23,9 @@ class SphinxConf extends AbstractWriter
      * @var array
      */
     protected $commands = [
-        'searchd' => 'searchd',
-        'indexer' => 'indexer'
+        'searchd'   => 'searchd',
+        'indexer'   => 'indexer',
+        'common'    => 'common'
     ];
 
     /**
@@ -45,10 +46,12 @@ class SphinxConf extends AbstractWriter
         $config = new Config($config, true);
         // Substitute variables
         $config = $this->substituteVars($config);
-        // Format searchd deamon config
+        // Format searchd section options
         $string .= $this->getCommandConfig($config, 'searchd');
-        // Format indexer command config
+        // Format indexer section options
         $string .= $this->getCommandConfig($config, 'indexer');
+        // Format common section options
+        $string .= $this->getCommandConfig($config, 'common');
         // Format indexes config
         $string .= $this->getSectionConfig($config, 'indexes');
         // Format data source config

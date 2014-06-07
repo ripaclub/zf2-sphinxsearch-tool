@@ -28,6 +28,8 @@ return [
         'mem_limit' => '256M',
         'write_buffer' => '4M',
     ],
+    'common' => [
+    ],
     'sources' => [
     ],
     'indexes' => [

@@ -93,6 +93,10 @@ It can have this children:
 - `indexer`
 
     Insert here your [indexer configuration options](http://sphinxsearch.com/docs/current.html#confgroup-indexer)
+    
+- `common`
+
+    Insert here you [common section configuration options](http://sphinxsearch.com/docs/current.html#confgroup-common)
 
 - `indexes`
 

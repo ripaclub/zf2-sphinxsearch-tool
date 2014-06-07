@@ -1,9 +1,9 @@
 Sphinx Search Tool
 ==================
 
-An utility that provides a set of tools to configure and handle Sphinx Search engine.
+An utility that provides a set of tools to configure and handle Sphinx Search configurations and sources.
 
-The main purpose is to provide an automated way to build a fully functional and correct Sphinx Search configuration, starting from a ZF2 module configuration file.
+The main purpose is to provide an automated way to build a Sphinx Search configuration starting from a ZF2 configuration file.
 
 It runs from the command line as standalone CLI tool or can be installed as a ZF2 module.
 
@@ -44,6 +44,12 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
 ```
 4. Run a `composer update`
 5. Execute the `sphinx-tool.php`
+
+## Use it from command line
+
+Open your console, go to the `zf2-sphinxsearch-tool` directory, and type `php -f sphinx-tool.php` to read the help.
+
+...
 
 ---
 

@@ -71,6 +71,13 @@ class Module implements
      */
     public function getConsoleUsage(AdapterInterface $console)
     {
-        return ['// TODO'];
+        return [
+            'sphinx show config [--file=]' => 'Print to standard output the SphinxSearch settings',
+            ['[--file=]', 'The path of a ZF2 config file containing SphinxSearch settings (optional)'],
+            'sphinx print config [--input=] --output= [--nolock]' => 'Write a SphinxSearch configuration file',
+            ['[--input=]', 'The path of a ZF2 config file containing SphinxSearch settings (optional)'],
+            ['--output=', 'The path of the output .conf file'],
+            ['[--nolock]', 'Wheter to write with exclusive lock or not (default true, optional)']
+        ];
     }
 }

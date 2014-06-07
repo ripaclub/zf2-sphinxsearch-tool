@@ -27,6 +27,19 @@ class Module implements
     ConsoleUsageProviderInterface
 {
     /**
+     * @var bool
+     */
+    private static $consoleBannerEnabled = true;
+
+    /**
+     * @param bool $enable
+     */
+    public static function setConsoleBannerEnabled($enable = true)
+    {
+        static::$consoleBannerEnabled = $enable;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getAutoloaderConfig()
@@ -60,10 +73,14 @@ class Module implements
      */
     public function getConsoleBanner(AdapterInterface $console)
     {
-        $figlet = new Figlet(['font' => __DIR__ . '/assets/font/colossal.flf']);
-        $figlet->setOutputWidth($console->getWidth());
-        $figlet->setJustification(Figlet::JUSTIFICATION_CENTER);
-        return PHP_EOL . $figlet->render('Sphinx Search Tool');
+        if (static::$consoleBannerEnabled) {
+            $figlet = new Figlet(['font' => __DIR__ . '/assets/font/colossal.flf']);
+            $figlet->setOutputWidth($console->getWidth());
+            $figlet->setJustification(Figlet::JUSTIFICATION_CENTER);
+            return PHP_EOL . $figlet->render('Sphinx Search Tool');
+        } else {
+            return '';
+        }
     }
 
     /**

@@ -67,7 +67,7 @@ class Module implements
                 $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinx.config.php.dist';
             }
         }
-        $moduleConfig = $this->injectCharsetTableVariables($moduleConfig);
+        $moduleConfig = $this->createCharsetTableVariables($moduleConfig);
         return $moduleConfig;
     }
 
@@ -77,7 +77,7 @@ class Module implements
      * @param array $config
      * @return array
      */
-    private function injectCharsetTableVariables(array $config)
+    private function createCharsetTableVariables(array $config)
     {
         if (isset($config['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
             $charsetConfig = include __DIR__ . '/config/sphinx.charset.config.php';

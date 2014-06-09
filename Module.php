@@ -60,10 +60,31 @@ class Module implements
     {
         $moduleConfig = include __DIR__ . '/config/module.config.php';
         $moduleConfig = array_merge($moduleConfig, include __DIR__ . '/config/routes.config.php');
-        if (file_exists(__DIR__ . '/config/sphinxsearch.config.php')) {
-            $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinxsearch.config.php';
-        } else if (file_exists(__DIR__ . '/config/sphinxsearch.config.php.dist')) {
-            $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinxsearch.config.php.dist';
+        if (file_exists(__DIR__ . '/config/sphinx.config.php')) {
+            $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinx.config.php';
+        } else {
+            if (file_exists(__DIR__ . '/config/sphinx.config.php.dist')) {
+                $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinx.config.php.dist';
+            }
+        }
+        //
+        if (isset($moduleConfig['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
+            $charsetConfig = include __DIR__ . '/config/sphinx.charset.config.php';
+            $defaults = $charsetConfig['charset']['defaults'];
+            $alphanumCharset = $defaults['alphanum'];
+            $completeCharset = implode(', ', $defaults);
+            $languages = $charsetConfig['charset']['languages'];
+            $moduleConfig['sphinxsearch']['variables']['charset_alphanum'] = $alphanumCharset;
+            $moduleConfig['sphinxsearch']['variables']['charset_complete'] = $completeCharset;
+            foreach ($languages as $lang => $charset) {
+                if (empty($charset)) {
+//                    NOTE: do nothing
+//                    NOTE: conservative, it is better to do not provide any charset table that provide a wrong one
+//                    $moduleConfig['sphinxsearch']['variables']['charset_'. $lang] = $completeCharset;
+                } else {
+                    $moduleConfig['sphinxsearch']['variables']['charset_' . $lang] = $alphanumCharset . ', ' . $charset;
+                }
+            }
         }
         return $moduleConfig;
     }

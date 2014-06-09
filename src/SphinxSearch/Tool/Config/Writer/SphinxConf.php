@@ -156,7 +156,8 @@ class SphinxConf extends AbstractWriter
                             array_map(
                                 function ($row) {
                                     if (strlen($row) >= 80) {
-                                        return str_replace(', ', ', \\' . PHP_EOL, $row);
+                                        $row = str_replace(', ', ', \\' . PHP_EOL . "\t", $row);
+                                        return rtrim($row, "\t");
                                     }
                                     return $row;
                                 },

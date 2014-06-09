@@ -94,12 +94,12 @@ class Module implements
             // Inject language charset table variables
             foreach ($languages as $lang => $table) {
                 if (empty($table)) {
-                    $config['sphinxsearch']['variables']['charset_' . $lang] = $default;
+                    $config['sphinxsearch']['variables'][$prefix . $lang] = $default;
                 } else {
                     $alphanum = '';
-                    $alphanum .= $config['sphinxsearch']['variables']['charset_digits'] . ', ';
-                    $alphanum .= $config['sphinxsearch']['variables']['charset_alphabet'];
-                    $config['sphinxsearch']['variables']['charset_' . $lang] = $alphanum . ', ' . $table;
+                    $alphanum .= $config['sphinxsearch']['variables'][$prefix . 'digits'] . ', ';
+                    $alphanum .= $config['sphinxsearch']['variables'][$prefix . 'alphabet'];
+                    $config['sphinxsearch']['variables'][$prefix . $lang] = $alphanum . ', ' . $table;
                 }
             }
         }

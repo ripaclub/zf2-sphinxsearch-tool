@@ -5,9 +5,11 @@ Sphinx Search Tool
 
 An utility that provides a set of tools to **create** and handle **Sphinx Search configurations** and **sources**.
 
-The main purpose is to provide an automated way to build a Sphinx Search configuration starting from a ZF2 configuration.
+It provides an automated way to build a Sphinx Search configuration starting from a ZF2 configuration.
 
-Note tha this tool provides also a **variable substitutions mechanism** (see [here](#configuration)).
+Note this utility provides also a **variable substitutions mechanism** (see [here](#configuration)).
+
+Futhermore, it allow you to **generate Sphinx Search data source files** (XML and TSV) for your indexes.
 
 It runs from the command line as standalone CLI tool or can be installed as a ZF2 module.
 
@@ -65,15 +67,15 @@ You can output (as array) to your console the Sphinx Search settings stored in t
 The Sphinx Search settings here specified will be merged with the default settings contained in ZF2 Sphinx Search Tool.
 
 ```bash
-php -f sphinx-tool.php show config
-php -f sphinx-tool.php show config --file=sphinx.conf.php
+php -f sphinx-tool.php sphinx show config
+php -f sphinx-tool.php sphinx show config --file=sphinx.conf.php
 ```
 
 Also, you can directly write the configuration in the Sphinx Search format.
 
 ```bash
-php -f sphinx-tool.php print config --output=config/sphinx.dev.conf
-php -f sphinx-tool.php print config --input=sphinx.conf.php --output=config/sphinx.dev.conf
+php -f sphinx-tool.php sphinx print config --output=config/sphinx.dev.conf
+php -f sphinx-tool.php sphinx print config --input=sphinx.conf.php --output=config/sphinx.dev.conf
 ```
 
 ##### Note

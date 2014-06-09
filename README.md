@@ -141,30 +141,30 @@ return [
         ],
         'indexes' => [
             'realtime' => [
-                'type' => 'rt',
-                'path' => '{idx_path}realtime',
-                'rt_field' => 'title',
-                'rt_field' => 'content',
-                'rt_attr_uint' => 'gid',
+                'type = rt',
+                'path = {idx_path}realtime',
+                'rt_field = title',
+                'rt_field = content',
+                'rt_attr_uint = gid',
             ],
             'main' => [
-                'source' => 'main',
-                'path' => '{idx_path}main',
+                'source = main',
+                'path = {idx_path}main',
             ],
             'delta : main' => [
-                'source' => 'delta',
-                'path' => '{idx_path}delta',
+                'source = delta',
+                'path = {idx_path}delta',
             ]
         ],
         'sources' => [
             'main' => [
-                'sql_query_pre' => 'SET NAMES utf8',
-                'sql_query_pre' => 'REPLACE INTO sph_counter SELECT 1, MAX(id) FROM documents',
-                'sql_query' => 'SELECT id, title, body FROM documents WHERE id<=(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
+                'sql_query_pre = SET NAMES utf8',
+                'sql_query_pre = REPLACE INTO sph_counter SELECT 1, MAX(id) FROM documents',
+                'sql_query = SELECT id, title, body FROM documents WHERE id<=(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
             ],
             'delta : main' => [
-                'sql_query_pre' => 'SET NAMES utf8',
-                'sql_query' => 'SELECT id, title, body FROM documents WHERE id>(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
+                'sql_query_pre = SET NAMES utf8',
+                'sql_query = SELECT id, title, body FROM documents WHERE id>(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
             ]
         ]
     ]

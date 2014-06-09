@@ -67,7 +67,7 @@ class Module implements
                 $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinx.config.php.dist';
             }
         }
-        $moduleConfig = $this->createCharsetTableVariables($moduleConfig);
+        $moduleConfig = $this->createCharsetTableVariables($moduleConfig, 'utf8');
         return $moduleConfig;
     }
 
@@ -75,15 +75,16 @@ class Module implements
      * Read Sphinx Search charset tables and create variables to expose them
      *
      * @param array $config
+     * @param $encoding_type
      * @return array
      */
-    private function createCharsetTableVariables(array $config)
+    private function createCharsetTableVariables(array $config, $encoding_type = 'utf8')
     {
-        if (isset($config['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
-            $charsetConfig = include __DIR__ . '/config/sphinx.charset.config.php';
+        if (isset($config['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.utf8.config.php')) {
+            $charsetConfig = include __DIR__ . '/config/sphinx.charset.utf8.config.php';
             $languages = $charsetConfig['languages'];
             $defaults = $charsetConfig['defaults'];
-            $prefix = 'charset_';
+            $prefix = 'charset_' . $encoding_type . '_';
             // Inject default charset table variables
             foreach ($defaults as $name => $table) {
                 $config['sphinxsearch']['variables'][$prefix . $name] = $table;

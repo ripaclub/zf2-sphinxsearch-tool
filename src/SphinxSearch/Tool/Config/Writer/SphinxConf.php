@@ -154,11 +154,11 @@ class SphinxConf extends AbstractWriter
                         $string .= implode(
                             PHP_EOL . "\t",
                             array_map(
-                                function ($val) {
-                                    if (strlen($val) >= 80) {
-                                        return implode("\\" . PHP_EOL, explode(' ', $val));
+                                function ($row) {
+                                    if (strlen($row) >= 80) {
+                                        return str_replace(', ', ', \\' . PHP_EOL, $row);
                                     }
-                                    return $val;
+                                    return $row;
                                 },
                                 $values->toArray()
                             )

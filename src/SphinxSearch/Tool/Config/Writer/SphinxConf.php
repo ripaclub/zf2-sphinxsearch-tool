@@ -118,20 +118,15 @@ class SphinxConf extends AbstractWriter
      *
      * @param array $values
      * @param bool $tab
-     * @param bool $revert
      * @return string
      */
-    private function getValuesString(array $values, $tab = true, $revert = false)
+    private function getValuesString(array $values, $tab = true)
     {
         return implode(
             ($tab ? PHP_EOL . "\t" : PHP_EOL),
             array_map(
-                function ($key) use ($values, $revert) {
-                    if ($revert) {
-                        return $values[$key] . ' = ' . $key;
-                    } else {
-                        return $key . ' = ' . $values[$key];
-                    }
+                function ($key) use ($values) {
+                    return $key . ' = ' . $values[$key];
                 },
                 array_keys($values)
             )
@@ -156,7 +151,7 @@ class SphinxConf extends AbstractWriter
                 foreach ($config as $name => $values) {
                     if ($values->count() > 0) {
                         $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
-                        $string .= $this->getValuesString($values->toArray(), true, true);
+                        $string .= implode(PHP_EOL . "\t", $values->toArray());
                         $string .= PHP_EOL . '}' . PHP_EOL;
                     }
                 }

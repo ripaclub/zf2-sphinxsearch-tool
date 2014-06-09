@@ -79,7 +79,7 @@ class Module implements
      */
     private function injectCharsetTableVariables(array $config)
     {
-        if (isset($onfig['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
+        if (isset($config['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
             $charsetConfig = include __DIR__ . '/config/sphinx.charset.config.php';
             $defaults = $charsetConfig['charset']['defaults'];
             $alphanumCharset = $defaults['alphanum'];

@@ -67,30 +67,37 @@ class Module implements
                 $moduleConfig['sphinxsearch'] = include __DIR__ . '/config/sphinx.config.php.dist';
             }
         }
-        $this->injectCharsetTableVariables();
+        $moduleConfig = $this->injectCharsetTableVariables($moduleConfig);
         return $moduleConfig;
     }
 
-    private function injectCharsetTableVariables()
+    /**
+     * Read Sphinx Search default charset tables and create variables to expose them
+     *
+     * @param array $config
+     * @return array
+     */
+    private function injectCharsetTableVariables(array $config)
     {
-        if (isset($moduleConfig['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
+        if (isset($onfig['sphinxsearch']) && file_exists(__DIR__ . '/config/sphinx.charset.config.php')) {
             $charsetConfig = include __DIR__ . '/config/sphinx.charset.config.php';
             $defaults = $charsetConfig['charset']['defaults'];
             $alphanumCharset = $defaults['alphanum'];
             $completeCharset = implode(', ', $defaults);
             $languages = $charsetConfig['charset']['languages'];
-            $moduleConfig['sphinxsearch']['variables']['charset_table_alphanum'] = $alphanumCharset;
-            $moduleConfig['sphinxsearch']['variables']['charset_table_complete'] = $completeCharset;
+            $config['sphinxsearch']['variables']['charset_table_alphanum'] = $alphanumCharset;
+            $config['sphinxsearch']['variables']['charset_table_complete'] = $completeCharset;
             foreach ($languages as $lang => $charset) {
                 if (empty($charset)) {
 //                    NOTE: do nothing
 //                    NOTE: conservative, it is better to do not provide any charset table that provide a wrong one
 //                    $moduleConfig['sphinxsearch']['variables']['charset_table_'. $lang] = $completeCharset;
                 } else {
-                    $moduleConfig['sphinxsearch']['variables']['charset_table_' . $lang] = $alphanumCharset . ', ' . $charset;
+                    $config['sphinxsearch']['variables']['charset_table_' . $lang] = $alphanumCharset . ', ' . $charset;
                 }
             }
         }
+        return $config;
     }
 
     /**

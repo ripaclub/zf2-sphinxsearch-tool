@@ -34,7 +34,7 @@ class SphinxConfigController extends AbstractActionController
         $request = $this->getRequest();
         $filename = $request->getParam('file');
         // Retrieve configuration
-        $config = $this->getConfig($filename)->toArray();
+        $config = array_filter($this->getConfig($filename)->toArray());
         // Show configuration
         $console = $this->getConsole();
 
@@ -53,7 +53,7 @@ class SphinxConfigController extends AbstractActionController
         $output = $request->getParam('output');
         $elock = !$request->getParam('nolock', false);
         // Retrieve configuration
-        $config = $this->getConfig($input)->toArray();
+        $config = array_filter($this->getConfig($input)->toArray());
         // Write configuration
         $writer = new SphinxConf();
         $writer->toFile($output, $config, $elock);

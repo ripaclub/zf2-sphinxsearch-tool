@@ -104,7 +104,7 @@ It can have this children:
     
 - `common`
 
-    Insert here you [common section configuration options](http://sphinxsearch.com/docs/current.html#confgroup-common)
+    Insert here your [common section configuration options](http://sphinxsearch.com/docs/current.html#confgroup-common)
 
 - `indexes`
 

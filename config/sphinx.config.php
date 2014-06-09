@@ -10,10 +10,10 @@
  */
 return [
     'variables' => [
-        'log_path'      => '/var/log/sphinx/',
+        'log_path' => '/var/log/sphinx/',
         'lib_path' => '/var/lib/sphinx',
-        'run_path'      => '/var/run/sphinx/',
-        'idx_path'      => '/var/idx/sphinx/',
+        'run_path' => '/var/run/sphinx/',
+        'idx_path' => '/var/idx/sphinx/',
     ],
     'searchd' => [
         'listen' => '9306:mysql41',

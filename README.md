@@ -171,6 +171,10 @@ return [
 ];
 ```
 
+##### Note
+
+For indexes and sources the specification happens with simple arrays (i.e., no keys, so they are not associative arrays) of Sphinx Search options strings.
+
 ### Create data sources
 
 ...

@@ -75,9 +75,11 @@ class XML2 extends \XMLWriter implements SourceInterface
         $this->startElement('sphinx:docset');
         $this->startElement('sphinx:schema');
         // Add fields to the schema
-        foreach ($this->fields as $field) {
+        foreach ($this->fields as $fields) {
             $this->startElement('sphinx:field');
-            $this->writeAttribute('name', $field);
+            foreach ($fields as $key => $value) {
+                $this->writeAttribute($key, $value);
+            }
             $this->endElement();
         }
         // Add attributes to the schema

@@ -13,6 +13,7 @@ namespace SphinxSearch\Tool\Config\Writer;
 use Zend\Config\Config;
 use Zend\Config\Processor\Token;
 use Zend\Config\Writer\AbstractWriter;
+use Zend\Filter\Word\SeparatorToSeparator;
 
 /**
  * Class SphinxConf
@@ -122,11 +123,29 @@ class SphinxConf extends AbstractWriter
      */
     private function getValuesString(array $values, $tab = true)
     {
+        $glue = $tab ? PHP_EOL . "\t" : PHP_EOL;
         return implode(
-            ($tab ? PHP_EOL . "\t" : PHP_EOL),
+            $glue,
             array_map(
-                function ($key) use ($values) {
-                    return $key . ' = ' . $values[$key];
+                function ($key) use ($values, $glue) {
+                    if (!is_array($values[$key])) {
+                        $return = $key . ' = ' . $values[$key];
+                    } else {
+                        $return = implode(
+                            $glue,
+                            array_map(
+                                function ($value) use ($key) {
+                                    return $key . ' = ' . $value;
+                                },
+                                $values[$key]
+                            )
+                        );
+                    }
+                    if ($key == 'charset_table') {
+                        $filter = new SeparatorToSeparator(', ', ', \\' . $glue);
+                        return $filter->filter($return);
+                    }
+                    return $return;
                 },
                 array_keys($values)
             )
@@ -146,28 +165,39 @@ class SphinxConf extends AbstractWriter
         if (isset($config[$section])) {
             /** @var Config $config */
             $config = $config[$section];
+            // If there is at least one section
             if ($config->count() > 0) {
                 /** @var Config $values */
                 foreach ($config as $name => $values) {
                     if ($values->count() > 0) {
                         $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
-                        $string .= implode(
-                            PHP_EOL . "\t",
-                            array_map(
-                                function ($row) {
-                                    if (strlen($row) >= 80) {
-                                        return rtrim(str_replace(', ', ', \\' . PHP_EOL . "\t", $row), "\t");
-                                    }
-                                    return $row;
-                                },
-                                $values->toArray()
-                            )
-                        );
+                        $string .= $this->getValuesString($values->toArray());
                         $string .= PHP_EOL . '}' . PHP_EOL;
                     }
                 }
             }
         }
         return $string;
+    }
+
+    /**
+     * @param $subject
+     * @param string $search
+     * @param string $replace
+     * @param int $columns
+     * @param bool $tab
+     * @return mixed|string
+     */
+    private function cutString($subject, $search = ' ', $replace = PHP_EOL, $columns = 80, $tab = true)
+    {
+        if (strlen($subject) >= 80) {
+            if ($tab) {
+                $replace = $replace . "\t";
+                return rtrim(str_replace($search, $replace, $subject), "\t");
+            } else {
+                return str_replace($search, $replace, $subject);
+            }
+        }
+        return $subject;
     }
 }

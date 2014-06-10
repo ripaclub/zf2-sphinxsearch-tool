@@ -10,18 +10,34 @@
  */
 namespace SphinxSearch\Tool\Source\Writer;
 
+use SphinxSearch\Tool\Source\Exception\NotValidDocumentException;
+
 /**
  * Class TSV
  *
  */
 class TSV implements SourceInterface
 {
-    // TODO: see function fputcsv http://php.net/manual/en/function.fputcsv.php
+    /**
+     * @var resource
+     */
+    protected $handle;
+
+    /**
+     * Constructor
+     * @param array $options
+     */
+    public function __construct(array $options = [])
+    {
+        $this->initialize();
+    }
+
     /**
      * {@inheritdoc}
      */
     public function initialize()
     {
+        $this->openURI('php://output');
     }
 
     /**
@@ -29,6 +45,12 @@ class TSV implements SourceInterface
      */
     public function openURI($uri)
     {
+        $this->handle = fopen($uri, 'wb');
+        if (!$this->handle) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -43,6 +65,10 @@ class TSV implements SourceInterface
      */
     public function addDocument(array $doc)
     {
+        if (!isset($doc['id'])) {
+            throw new NotValidDocumentException('Document array must have an element with "id" key');
+        }
+//        fputcsv()
     }
 
     /**

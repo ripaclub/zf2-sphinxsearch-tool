@@ -246,20 +246,22 @@ The `sphinx.config.php` of our project is:
 
 ```php
 return [
-    'indexes' => [
-        'my_idx' => [
-            'type' => 'plain',
-            'path' => '{idx_path}restaurant_it',
-            'source' => 'my_source',
-            'dict' => 'keywords',
-            'charset_type' => 'utf-8',
-            'charset_table' => '{charset_utf8_default}',
+    `sphinxsearch' => [
+        'indexes' => [
+            'my_idx' => [
+                'type' => 'plain',
+                'path' => '{idx_path}restaurant_it',
+                'source' => 'my_source',
+                'dict' => 'keywords',
+                'charset_type' => 'utf-8',
+                'charset_table' => '{charset_utf8_default}',
+            ],
         ],
-    ],
-    'sources' => [
-        'my_source' => [
-            'type' => 'xmlpipe2',
-            'xmlpipe_command' => 'php -f ./public/index.php sphinx xmlpipe2'
+        'sources' => [
+            'my_source' => [
+                'type' => 'xmlpipe2',
+                'xmlpipe_command' => 'php -f ./public/index.php sphinx xmlpipe2'
+            ]
         ]
     ]
 ];

@@ -122,45 +122,36 @@ class SphinxConf extends AbstractWriter
      */
     private function getValuesString(array $values, $tab = true)
     {
+        $glue = $tab ? PHP_EOL . "\t" : PHP_EOL;
         return implode(
-            ($tab ? PHP_EOL . "\t" : PHP_EOL),
+            $glue,
             array_map(
-                function ($key) use ($values) {
+                function ($key) use ($values, $glue) {
                     var_dump($values[$key]);
+                    $return = '';
                     if (!is_array($values[$key])) {
-                        return $key . ' = ' . $values[$key];
+                        $return = $key . ' = ' . $values[$key];
                     } else {
-                        $return = '';
-                        foreach ($values[$key] as $value) {
-                            $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
-                        }
-                        return $return;
+                        $return = implode(
+                            $glue,
+                            array_map(
+                                function ($value) use ($key) {
+                                    return $key . ' = ' . $value;
+                                },
+                                $values[$key]
+                            )
+                        );
+//                        $return = '';
+//                        foreach ($values[$key] as $value) {
+//                            $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
+//                        }
+//                        return $return;
                     }
+                    return $return;
                 },
                 array_keys($values)
             )
         );
-    }
-
-    /**
-     * @param $subject
-     * @param string $search
-     * @param string $replace
-     * @param int $columns
-     * @param bool $tab
-     * @return mixed|string
-     */
-    private function cutString($subject, $search = ' ', $replace = PHP_EOL, $columns = 80, $tab = true)
-    {
-        if (strlen($subject) >= 80) {
-            if ($tab) {
-                $replace = $replace . "\t";
-                return rtrim(str_replace($search, $replace, $subject), "\t");
-            } else {
-                return str_replace($search, $replace, $subject);
-            }
-        }
-        return $subject;
     }
 
     /**
@@ -201,5 +192,26 @@ class SphinxConf extends AbstractWriter
             }
         }
         return $string;
+    }
+
+    /**
+     * @param $subject
+     * @param string $search
+     * @param string $replace
+     * @param int $columns
+     * @param bool $tab
+     * @return mixed|string
+     */
+    private function cutString($subject, $search = ' ', $replace = PHP_EOL, $columns = 80, $tab = true)
+    {
+        if (strlen($subject) >= 80) {
+            if ($tab) {
+                $replace = $replace . "\t";
+                return rtrim(str_replace($search, $replace, $subject), "\t");
+            } else {
+                return str_replace($search, $replace, $subject);
+            }
+        }
+        return $subject;
     }
 }

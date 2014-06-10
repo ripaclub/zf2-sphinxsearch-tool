@@ -32,17 +32,10 @@ class XML2 extends \XMLWriter implements SourceInterface
      */
     public function __construct(array $options = [])
     {
-        $this->initialize(); // $this->openUri('php://output');
-        $this->setOptions($options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initialize()
-    {
         // Store the xml tree in memory
         $this->openMemory();
+        // Set options
+        $this->setOptions($options);
     }
 
     /**
@@ -92,7 +85,9 @@ class XML2 extends \XMLWriter implements SourceInterface
         }
         // End sphinx:schema
         $this->endElement();
-        print $this->outputMemory();
+        $return = $this->outputMemory();
+        $this->flush();
+        return $return;
     }
 
     /**
@@ -115,7 +110,9 @@ class XML2 extends \XMLWriter implements SourceInterface
             $this->endElement();
         }
         $this->endElement();
-        print $this->outputMemory();
+        $return = $this->outputMemory();
+        $this->flush();
+        return $return;
     }
 
     /**
@@ -125,6 +122,8 @@ class XML2 extends \XMLWriter implements SourceInterface
     {
         // End sphinx:docset
         $this->endElement();
-        print $this->outputMemory();
+        $return = $this->outputMemory();
+        $this->flush();
+        return $return;
     }
 }

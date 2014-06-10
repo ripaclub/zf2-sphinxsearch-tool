@@ -30,6 +30,24 @@ return [
                         ],
                     ],
                 ],
+                'sphinxsearch-test-tsv' => [
+                    'options' => [
+                        'route' => 'sphinx test tsv',
+                        'defaults' => [
+                            'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
+                            'action' => 'test-tsv',
+                        ],
+                    ],
+                ],
+                'sphinxsearch-test-xml' => [
+                    'options' => [
+                        'route' => 'sphinx test xml',
+                        'defaults' => [
+                            'controller' => 'SphinxSearch\Tool\Controller\Console\SphinxConfig',
+                            'action' => 'test-xml',
+                        ],
+                    ],
+                ],
             ],
         ],
     ],

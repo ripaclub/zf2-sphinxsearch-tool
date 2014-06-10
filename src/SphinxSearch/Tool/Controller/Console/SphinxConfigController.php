@@ -13,6 +13,8 @@ namespace SphinxSearch\Tool\Controller\Console;
 use SphinxSearch\Tool\Config\Writer\SphinxConf;
 use SphinxSearch\Tool\Controller\Traits\CliTrait;
 use SphinxSearch\Tool\Controller\Traits\ConfigTrait;
+use SphinxSearch\Tool\Source\Writer\TSV;
+use SphinxSearch\Tool\Source\Writer\XML2;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -60,4 +62,47 @@ class SphinxConfigController extends AbstractActionController
 
         return false;
     }
+
+    public function testTsvAction()
+    {
+        $data = [
+            ['id' => '1', 'name' => 'ciao', 'a' => 'mondo'],
+            ['id' => '2', 'name' => 'hello', 'a' => 'world']
+        ];
+        $writer = new TSV();
+        $writer->openURI('tsv.tsv');
+        echo $writer->beginOutput();
+        foreach ($data as $doc) {
+            echo $writer->addDocument($doc);
+            sleep(5);
+        }
+        echo $writer->endOutput();
+    }
+
+    public function testXMLAction()
+    {
+        $data = [
+            ['id' => '1', 'name' => 'ciao', 'a' => 'mondo'],
+            ['id' => '2', 'name' => 'hello', 'a' => 'world']
+        ];
+        $writer = new XML2();
+        $writer->openUri('xml.xml');
+        $writer->setFields(
+            [
+                ['name' => 'name']
+            ]
+        );
+        $writer->setAttributes(
+            [
+                ['name' => 'a', 'type' => 'string']
+            ]
+        );
+        echo $writer->beginOutput();
+        foreach ($data as $doc) {
+            echo $writer->addDocument($doc);
+            sleep(5);
+        }
+        echo $writer->endOutput();
+    }
+
 }

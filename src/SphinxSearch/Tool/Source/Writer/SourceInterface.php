@@ -10,16 +10,13 @@
  */
 namespace SphinxSearch\Tool\Source\Writer;
 
+use SphinxSearch\Tool\Source\Exception\NotValidDocumentException;
+
 /**
  * Interface SourceInterface
  */
 interface SourceInterface
 {
-    /**
-     * Open the memory
-     */
-    public function initialize();
-
     /**
      * Create new data source using URI for output
      *
@@ -40,7 +37,7 @@ interface SourceInterface
      * If the document does not contain an identifier (i.e., element with id key) it throws an exception
      *
      * @param array $doc
-     * @throws \SphinxSearch\Tool\Source\Exception\NotValidDocumentException
+     * @throws NotValidDocumentException
      * @return string The current buffer as a string
      */
     public function addDocument(array $doc);

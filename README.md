@@ -202,9 +202,9 @@ For indexes and sources the specification happens with simple arrays (i.e. no ke
 
 ### Create data sources
 
-Suppose you have a result set (e.g. variable `$results`) obtained from a database (e.g. MongoDB) and you want to index them with Sphinx Search to serve searches through a plain index.
+Suppose you have a result set (e.g. variable `$results`) obtained from a database (e.g. MongoDB) and you want to index it with Sphinx Search to serve searches through a plain index.
 
-First of all we need to create a data source (e.g. an `xmlpipe2` source) that will stream our documents to `php://stdout` (for this purpose we do not specify any URI for the writer).
+First of all we need to create a data source (e.g. an `xmlpipe2` source) that will stream our documents to the standard output (for this purpose we do not specify any URI for the writer).
 
 ```php
 use SphinxSearch\Tool\Source\Writer\XML2;
@@ -223,7 +223,7 @@ use SphinxSearch\Tool\Source\Writer\XML2;
             ['name' => 'price', 'type' => 'int'],
         ]
     );
-    $writer->beginOutput();
+    echo $writer->beginOutput();
     $count = 1;
     foreach ($results as $result) {
         $document = [
@@ -233,10 +233,10 @@ use SphinxSearch\Tool\Source\Writer\XML2;
             'lng'                => deg2rad(floatval($result['lng'])),
             'price'              => (int) $result['price'],
         ];
-        $writer->addDocument($document);
+        echo $writer->addDocument($document);
         $count++;
     }
-    $writer->endOutput();
+    echo $writer->endOutput();
 ...
 ```
 
@@ -260,7 +260,7 @@ return [
         'sources' => [
             'my_source' => [
                 'type' => 'xmlpipe2',
-                'xmlpipe_command' => 'php -f ./public/index.php sphinx xmlpipe2'
+                'xmlpipe_command' => '/usr/bin/php -f /path/to/project/public/index.php sphinx xmlpipe2'
             ]
         ]
     ]

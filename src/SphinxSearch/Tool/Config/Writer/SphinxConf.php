@@ -128,8 +128,6 @@ class SphinxConf extends AbstractWriter
             $glue,
             array_map(
                 function ($key) use ($values, $glue) {
-                    var_dump($values[$key]);
-                    $return = '';
                     if (!is_array($values[$key])) {
                         $return = $key . ' = ' . $values[$key];
                     } else {
@@ -174,18 +172,6 @@ class SphinxConf extends AbstractWriter
                     if ($values->count() > 0) {
                         $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
                         $string .= $this->getValuesString($values->toArray());
-//                        $string .= implode(
-//                            PHP_EOL . "\t",
-//                            array_map(
-//                                function ($row) {
-//                                    if (strlen($row) >= 80) {
-//                                        return rtrim(str_replace(', ', ', \\' . PHP_EOL . "\t", $row), "\t");
-//                                    }
-//                                    return $row;
-//                                },
-//                                $values->toArray()
-//                            )
-//                        );
                         $string .= PHP_EOL . '}' . PHP_EOL;
                     }
                 }

@@ -118,19 +118,49 @@ class SphinxConf extends AbstractWriter
      *
      * @param array $values
      * @param bool $tab
+     * @param bool $multidimensional
      * @return string
      */
-    private function getValuesString(array $values, $tab = true)
+    private function getValuesString(array $values, $tab = true, $multidimensional = false)
     {
         return implode(
             ($tab ? PHP_EOL . "\t" : PHP_EOL),
             array_map(
-                function ($key) use ($values) {
-                    return $key . ' = ' . $values[$key];
+                function ($key) use ($values, $multidimensional) {
+                    if (!$multidimensional && is_string($values[$key])) {
+                        return $key . ' = ' . $values[$key];
+                    } else {
+                        $return = '';
+                        foreach ($values[$key] as $value) {
+                            $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
+                        }
+                        return $return;
+                    }
                 },
                 array_keys($values)
             )
         );
+    }
+
+    /**
+     * @param $subject
+     * @param string $search
+     * @param string $replace
+     * @param int $columns
+     * @param bool $tab
+     * @return mixed|string
+     */
+    private function cutString($subject, $search = ' ', $replace = PHP_EOL, $columns = 80, $tab = true)
+    {
+        if (strlen($subject) >= 80) {
+            if ($tab) {
+                $replace = $replace . "\t";
+                return rtrim(str_replace($search, $replace, $subject), "\t");
+            } else {
+                return str_replace($search, $replace, $subject);
+            }
+        }
+        return $subject;
     }
 
     /**
@@ -146,23 +176,24 @@ class SphinxConf extends AbstractWriter
         if (isset($config[$section])) {
             /** @var Config $config */
             $config = $config[$section];
+            // If there is at least one section
             if ($config->count() > 0) {
                 /** @var Config $values */
                 foreach ($config as $name => $values) {
                     if ($values->count() > 0) {
                         $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
-                        $string .= implode(
-                            PHP_EOL . "\t",
-                            array_map(
-                                function ($row) {
-                                    if (strlen($row) >= 80) {
-                                        return rtrim(str_replace(', ', ', \\' . PHP_EOL . "\t", $row), "\t");
-                                    }
-                                    return $row;
-                                },
-                                $values->toArray()
-                            )
-                        );
+//                        $string .= implode(
+//                            PHP_EOL . "\t",
+//                            array_map(
+//                                function ($row) {
+//                                    if (strlen($row) >= 80) {
+//                                        return rtrim(str_replace(', ', ', \\' . PHP_EOL . "\t", $row), "\t");
+//                                    }
+//                                    return $row;
+//                                },
+//                                $values->toArray()
+//                            )
+//                        );
                         $string .= PHP_EOL . '}' . PHP_EOL;
                     }
                 }

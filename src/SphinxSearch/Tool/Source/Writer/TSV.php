@@ -25,17 +25,8 @@ class TSV implements SourceInterface
 
     /**
      * Constructor
-     * @param array $options
      */
-    public function __construct(array $options = [])
-    {
-        $this->initialize();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initialize()
+    public function __construct()
     {
         $this->openURI('php://output');
     }
@@ -45,7 +36,7 @@ class TSV implements SourceInterface
      */
     public function openURI($uri)
     {
-        $this->handle = fopen($uri, 'wb');
+        $this->handle = fopen($uri, 'w');
         if (!$this->handle) {
             return false;
         } else {
@@ -58,6 +49,7 @@ class TSV implements SourceInterface
      */
     public function beginOutput()
     {
+        return '';
     }
 
     /**
@@ -68,7 +60,12 @@ class TSV implements SourceInterface
         if (!isset($doc['id'])) {
             throw new NotValidDocumentException('Document array must have an element with "id" key');
         }
-//        fputcsv()
+        ob_start();
+        $len = fputcsv($this->handle, $doc, "\t");
+        if ($len === false) {
+            throw new \RuntimeException('Error writing document');
+        }
+        return ob_get_clean();
     }
 
     /**
@@ -76,5 +73,7 @@ class TSV implements SourceInterface
      */
     public function endOutput()
     {
+        fclose($this->handle);
+        return '';
     }
 }

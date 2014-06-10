@@ -118,18 +118,18 @@ class SphinxConf extends AbstractWriter
      *
      * @param array $values
      * @param bool $tab
-     * @param bool $multidimensional
      * @return string
      */
-    private function getValuesString(array $values, $tab = true, $multidimensional = false)
+    private function getValuesString(array $values, $tab = true)
     {
         return implode(
             ($tab ? PHP_EOL . "\t" : PHP_EOL),
             array_map(
-                function ($key) use ($values, $multidimensional) {
-                    if (!$multidimensional && is_string($values[$key])) {
+                function ($key) use ($values) {
+                    if (is_string($values[$key])) {
                         return $key . ' = ' . $values[$key];
                     } else {
+                        print_r($values[$key]);
                         $return = '';
                         foreach ($values[$key] as $value) {
                             $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
@@ -182,6 +182,7 @@ class SphinxConf extends AbstractWriter
                 foreach ($config as $name => $values) {
                     if ($values->count() > 0) {
                         $string .= $this->sections[$section] . ' ' . $name . PHP_EOL . '{' . PHP_EOL . "\t";
+                        $string .= $this->getValuesString($values->toArray());
 //                        $string .= implode(
 //                            PHP_EOL . "\t",
 //                            array_map(

@@ -127,7 +127,7 @@ class SphinxConf extends AbstractWriter
             array_map(
                 function ($key) use ($values) {
                     var_dump($values[$key]);
-                    if (is_string($values[$key])) {
+                    if (!is_array($values[$key])) {
                         return $key . ' = ' . $values[$key];
                     } else {
                         $return = '';

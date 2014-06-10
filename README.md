@@ -12,7 +12,17 @@
     
     * A set of already defined useful variables, particularly the UTF-8 **charset tables**
     
-        - `charset_utf8_digits`, `charset_utf8_alphabet` (case-insensitive map for alphabet), `charset_utf8_latin_extra` (maps for special latin chars), `charset_utf8_a` to `charset_utf8_z` (map for diacritics), `charset_utf8_default` (map that merge all the previous togheter), and language based charse tables `charset_utf8_it`, `charset_utf8_en`, `charset_utf8_de`, `charset_utf8_es`, `charset_utf8_zh`, `charset_utf8_ja`, ... 
+        - `charset_utf8_digits`, map to tokenize only digits
+        
+        - `charset_utf8_alphabet`, case-insensitive map for [ISO basic latin alphabet](http://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet)
+        
+        - `charset_utf8_latin_extra`, table for special latin chars
+         
+        - `charset_utf8_a` to `charset_utf8_z` maps that normalize diacritics
+         
+        - `charset_utf8_default`, map that merge all the previous togheter
+        
+        - language based charse tables, e.g. `charset_utf8_it`, `charset_utf8_en`, `charset_utf8_de`, `charset_utf8_es`, `charset_utf8_zh`, `charset_utf8_ja` 
 
 * Classes to generate Sphinx Search **data source files or streams**
 
@@ -101,7 +111,7 @@ If you use ZF2 Sphinx Search Tool as a module included into your application you
 
 ### Configuration
 
-A Sphinx Search configuration can be defined via the `sphinxsearch` node element into you ZF2 configurations. The children of this node will be merged (i.e., added or substituted to) with defaults provided by ZF2 Sphinx Search Tool.
+A Sphinx Search configuration can be defined via the `sphinxsearch` node element into you ZF2 configurations. The children of this node will be merged (i.e. added or substituted to) with defaults provided by ZF2 Sphinx Search Tool.
 
 It can have this children:
 
@@ -188,13 +198,13 @@ return [
 
 ##### Note
 
-For indexes and sources the specification happens with simple arrays (i.e., no keys, so they are not associative arrays) of Sphinx Search options strings.
+For indexes and sources the specification happens with simple arrays (i.e. no keys, so they are not associative arrays) of Sphinx Search options strings.
 
 ### Create data sources
 
-Suppose you have a result set (e.g., `$results`) obtained from a database (eg, MongoDB) and you want to index them with Sphinx Search to serve searches through a plain index.
+Suppose you have a result set (e.g. variable `$results`) obtained from a database (eg, MongoDB) and you want to index them with Sphinx Search to serve searches through a plain index.
 
-First of all we need to create a data source (e.g., an `xmlpipe2` source) that will stream our documents to `php://stdout` (for this purpose we do not specify any URI for the writer).
+First of all we need to create a data source (e.g. an `xmlpipe2` source) that will stream our documents to `php://stdout` (for this purpose we do not specify any URI for the writer).
 
 ```php
 use SphinxSearch\Tool\Source\Writer\XML2;
@@ -230,7 +240,7 @@ use SphinxSearch\Tool\Source\Writer\XML2;
 ...
 ```
 
-Suppose to wrap previous code in a controller console action (i.e., `sphinx xmlpipe2`), we can therefore use it as our `xmlpipe_command` to populate the Sphinx Search index.
+Suppose to wrap previous code in a controller console action (i.e. `sphinx xmlpipe2`), we can therefore use it as our `xmlpipe_command` to populate the Sphinx Search index.
 
 The `sphinx.config.php` of our project is:
 
@@ -260,7 +270,7 @@ We now generate the `sphinx.conf`:
 ./vendor/bin/sphinx-tool.php sphinx print config --input=sphinx.config.php --output=sphinx.conf
 ```
 
-Everything is now ready. We can call the indexer command (i.e., `indexer -c sphinx.conf --all --rotate`) and serve searches.
+Everything is now ready. We can call the indexer command (i.e. `indexer -c sphinx.conf --all --rotate`) and serve searches.
 
 ---
 

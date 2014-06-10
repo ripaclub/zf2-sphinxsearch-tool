@@ -118,7 +118,7 @@ It can have this children:
 - `variables`
 
     This node contains the variables that will be substituted into all your Sphinx Search configuration options.
-    Some default variables are `log_path`, `lib_path`, `run_path`, and `idx_path` (respectively set to `/var/log/sphinx/`, `/var/lib/sphinx`, `/var/run/sphinx/`, and `/var/idx/sphinx/`).
+    Some default variables are `log_path`, `lib_path`, `run_path`, and `idx_path` (respectively set to `/var/log/sphinx`, `/var/lib/sphinx`, `/var/run/sphinx`, and `/var/idx/sphinx`).
     You can define your variables (or override the defaults) and use them into your other settings wrapping them inside brackets.
 
 - `searchd`
@@ -136,12 +136,12 @@ It can have this children:
 - `indexes`
 
     This node contains the configurations of your indexes as an associative array which keys corresponds to index names.
-    For each index you define you have to specify its [options](http://sphinxsearch.com/docs/current.html#confgroup-index) via associative arrays (also multidimensional if needed)
+    For each index you defined you have to specify its [options](http://sphinxsearch.com/docs/current.html#confgroup-index) via associative arrays (also multidimensional if needed)
 
 - `sources`
 
     This node contains the configurations of you data source as an associative array which keys corresponds to source names.
-    For each data source you define you have to specifiy its [options](http://sphinxsearch.com/docs/current.html#confgroup-source) via associative arrays (also multidimensional if needed)
+    For each data source you defined you have to specifiy its [options](http://sphinxsearch.com/docs/current.html#confgroup-source) via associative arrays (also multidimensional if needed)
     
 #### Example
 
@@ -151,16 +151,16 @@ An example of PHP array that defines a Sphinx Search configuration:
 return [
     'sphinxsearch' => [
         'variables' => [
-            'idx_path' => '/path/to/idx/'
+            'idx_path' => '/path/to/idx'
         ],
         'searchd' => [
             'listen' => '9306:mysql41',
-            'log' => '{log_path}searchd.log',
-            'query_log' => '{log_path}query.log',
-            'pid_file' => '{run_path}searchd.pid',
+            'log' => '{log_path}/searchd.log',
+            'query_log' => '{log_path}/query.log',
+            'pid_file' => '{run_path}/searchd.pid',
             'workers' => 'threads',
             'binlog_path' => '{lib_path}',
-            'sphinxql_state' => '{run_path}state.sql',
+            'sphinxql_state' => '{run_path}/state.sql',
         ],
         'indexer' => [
             'mem_limit' => '512M',
@@ -169,17 +169,17 @@ return [
         'indexes' => [
             'realtime' => [
                 'type' => 'rt',
-                'path' => '{idx_path}realtime',
+                'path' => '{idx_path}/realtime',
                 'rt_field' => ['title', 'content'],
                 'rt_attr_uint' => 'gid',
             ],
             'main' => [
                 'source' => 'main',
-                'path' => '{idx_path}main',
+                'path' => '{idx_path}/main',
             ],
             'delta : main' => [
                 'source' => 'delta',
-                'path' => '{idx_path}delta',
+                'path' => '{idx_path}/delta',
             ]
         ],
         'sources' => [
@@ -195,10 +195,6 @@ return [
     ]
 ];
 ```
-
-##### Note
-
-For indexes and sources the specification happens with simple arrays (i.e. no keys, so they are not associative arrays) of Sphinx Search options strings.
 
 ### Create data sources
 

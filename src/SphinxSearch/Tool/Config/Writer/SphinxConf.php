@@ -130,17 +130,37 @@ class SphinxConf extends AbstractWriter
                     if (is_string($values[$key])) {
                         return $key . ' = ' . $values[$key];
                     } else {
-                        return '';
-//                        $return = '';
-//                        foreach ($values[$key] as $value) {
-//                            $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
-//                        }
-//                        return $return;
+                        $return = '';
+                        foreach ($values[$key] as $value) {
+                            $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
+                        }
+                        return $return;
                     }
                 },
                 array_keys($values)
             )
         );
+    }
+
+    /**
+     * @param $subject
+     * @param string $search
+     * @param string $replace
+     * @param int $columns
+     * @param bool $tab
+     * @return mixed|string
+     */
+    private function cutString($subject, $search = ' ', $replace = PHP_EOL, $columns = 80, $tab = true)
+    {
+        if (strlen($subject) >= 80) {
+            if ($tab) {
+                $replace = $replace . "\t";
+                return rtrim(str_replace($search, $replace, $subject), "\t");
+            } else {
+                return str_replace($search, $replace, $subject);
+            }
+        }
+        return $subject;
     }
 
     /**
@@ -181,26 +201,5 @@ class SphinxConf extends AbstractWriter
             }
         }
         return $string;
-    }
-
-    /**
-     * @param $subject
-     * @param string $search
-     * @param string $replace
-     * @param int $columns
-     * @param bool $tab
-     * @return mixed|string
-     */
-    private function cutString($subject, $search = ' ', $replace = PHP_EOL, $columns = 80, $tab = true)
-    {
-        if (strlen($subject) >= 80) {
-            if ($tab) {
-                $replace = $replace . "\t";
-                return rtrim(str_replace($search, $replace, $subject), "\t");
-            } else {
-                return str_replace($search, $replace, $subject);
-            }
-        }
-        return $subject;
     }
 }

@@ -4,7 +4,7 @@
 
 ## Features
 
-* Console actions about Sphinx Search configurations
+* Console actions about Sphinx Search **configurations**
 
     * A **variable substitutions mechanism** (see [here](#configuration))
     

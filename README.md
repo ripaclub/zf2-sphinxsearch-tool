@@ -1,6 +1,6 @@
 ![Help message](help-img.png "Help message")
 
-**Sphinx Search Tool** is an utility that provides a set of tools aimed at the **creation of Sphinx Search configurations and data sources**.
+**Sphinx Search Tool** is an utility that provides a set of tools to **create Sphinx Search configurations and data sources**.
 
 ## Features
 
@@ -22,7 +22,7 @@
          
         - `charset_utf8_default`, map that merge all the previous togheter
         
-        - language based charse tables, e.g. `charset_utf8_it`, `charset_utf8_en`, `charset_utf8_de`, `charset_utf8_es`, `charset_utf8_zh`, `charset_utf8_ja` 
+        - language based charse tables, e.g. `charset_utf8_it`, `charset_utf8_en`, `charset_utf8_de`, `charset_utf8_es`, `charset_utf8_zh`, `charset_utf8_ja`, ... 
 
 * Classes to generate Sphinx Search **data source files or streams**
 
@@ -202,7 +202,7 @@ For indexes and sources the specification happens with simple arrays (i.e. no ke
 
 ### Create data sources
 
-Suppose you have a result set (e.g. variable `$results`) obtained from a database (eg, MongoDB) and you want to index them with Sphinx Search to serve searches through a plain index.
+Suppose you have a result set (e.g. variable `$results`) obtained from a database (e.g. MongoDB) and you want to index them with Sphinx Search to serve searches through a plain index.
 
 First of all we need to create a data source (e.g. an `xmlpipe2` source) that will stream our documents to `php://stdout` (for this purpose we do not specify any URI for the writer).
 
@@ -245,26 +245,27 @@ Suppose to wrap previous code in a controller console action (i.e. `sphinx xmlpi
 The `sphinx.config.php` of our project is:
 
 ```php
-...,
-'indexes' => [
-    'my_idx' => [
-        'type' => 'plain',
-        'path' => '{idx_path}restaurant_it',
-        'source' => 'my_source',
-        'dict' => 'keywords',
-        'charset_type' => 'utf-8',
-        'charset_table' => '{charset_utf8_default}',
+return [
+    'indexes' => [
+        'my_idx' => [
+            'type' => 'plain',
+            'path' => '{idx_path}restaurant_it',
+            'source' => 'my_source',
+            'dict' => 'keywords',
+            'charset_type' => 'utf-8',
+            'charset_table' => '{charset_utf8_default}',
+        ],
     ],
-],
-'sources' => [
-    'my_source' => [
-        'type' => 'xmlpipe2',
-        'xmlpipe_command' => 'php -f ./public/index.php sphinx xmlpipe2'
+    'sources' => [
+        'my_source' => [
+            'type' => 'xmlpipe2',
+            'xmlpipe_command' => 'php -f ./public/index.php sphinx xmlpipe2'
+        ]
     ]
-]
+];
 ```
 
-We now generate the `sphinx.conf`:
+We can now generate the `sphinx.conf`:
  
 ```bash
 ./vendor/bin/sphinx-tool.php sphinx print config --input=sphinx.config.php --output=sphinx.conf

@@ -32,6 +32,7 @@ if (file_exists("$basePath/config/application.config.php")) {
         $appConfig['module_listener_options']['module_paths']['SphinxSearch\Tool'] = __DIR__;
     }
 } else {
+    // Used as standalone CLI tool
     \SphinxSearch\Tool\Module::setConsoleBannerEnabled();
     $appConfig = [
         'modules' => [
@@ -46,6 +47,9 @@ if (file_exists("$basePath/config/application.config.php")) {
                 './vendor',
             ],
         ],
+        'view_manager' => [
+            'display_not_found_reason' => false,
+        ]
     ];
 }
 

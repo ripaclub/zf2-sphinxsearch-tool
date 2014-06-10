@@ -13,6 +13,7 @@ namespace SphinxSearch\Tool\Config\Writer;
 use Zend\Config\Config;
 use Zend\Config\Processor\Token;
 use Zend\Config\Writer\AbstractWriter;
+use Zend\Filter\Word\SeparatorToSeparator;
 
 /**
  * Class SphinxConf
@@ -141,11 +142,10 @@ class SphinxConf extends AbstractWriter
                                 $values[$key]
                             )
                         );
-//                        $return = '';
-//                        foreach ($values[$key] as $value) {
-//                            $return .= $key . ' = ' . $this->cutString($value, ', ', ', \\' . PHP_EOL, 80, true);
-//                        }
-//                        return $return;
+                    }
+                    if ($key == 'charset_table') {
+                        $filter = new SeparatorToSeparator(', ', ', \\' . $glue);
+                        return $filter->filter($return);
                     }
                     return $return;
                 },

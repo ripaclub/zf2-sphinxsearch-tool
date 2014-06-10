@@ -246,7 +246,7 @@ The `sphinx.config.php` of our project is:
 
 ```php
 return [
-    `sphinxsearch' => [
+    'sphinxsearch' => [
         'indexes' => [
             'my_idx' => [
                 'type' => 'plain',

@@ -1,25 +1,47 @@
-Sphinx Search Tool
-==================
-
 ![Help message](help-img.png "Help message")
 
-An utility that provides a set of tools to **create** and handle **Sphinx Search configurations** and **sources**.
+**Sphinx Search Tool** is an utility that provides a set of tools to **create Sphinx Search configurations and data sources**.
 
-It provides an automated way to build a Sphinx Search configuration starting from a ZF2 configuration.
+## Features
 
-Note this utility provides also a **variable substitutions mechanism** (see [here](#configuration)).
+* Console actions about Sphinx Search **configurations**
 
-Futhermore, it allow you to **generate Sphinx Search data source files** (XML and TSV) for your indexes.
+    * A **variable substitutions mechanism** (see [here](#configuration))
+    
+    * An automated way to **build** a Sphinx Search **configuration** from a ZF2 configuration (e.g. a PHP file returning a configuration array)
+    
+    * A set of already defined useful variables, particularly the UTF-8 **charset tables**
+    
+        - `charset_utf8_digits`, map to tokenize only digits
+        
+        - `charset_utf8_alphabet`, case-insensitive map for [ISO basic latin alphabet](http://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet)
+        
+        - `charset_utf8_latin_extra`, table for special latin chars
+         
+        - `charset_utf8_a` to `charset_utf8_z` maps that normalize diacritics
+         
+        - `charset_utf8_default`, map that merge all the previous togheter
+        
+        - language based charse tables, e.g. `charset_utf8_it`, `charset_utf8_en`, `charset_utf8_de`, `charset_utf8_es`, `charset_utf8_zh`, `charset_utf8_ja`, ... 
 
-It runs from the command line as standalone CLI tool or can be installed as a ZF2 module.
+* Classes to generate Sphinx Search **data source files or streams**
+
+    * Class to generate **XML** data for `xmlpipe2` (see [docs](http://sphinxsearch.com/docs/current.html#xmlpipe2))
+    
+    * Class to generate **TSV** data for `tsvpipe` (see [docs](http://sphinxsearch.com/docs/current.html#tsvpipe))
+
+* Can be used from command line as a **standalone CLI tool** or can be installed as a **ZF2 module**
 
 ## References
 
 - [Sphinx Search configuration options](http://sphinxsearch.com/docs/current.html#conf-reference)
 
 ## Requirements
+
  * Zend Framework 2.0.0 or later
+ 
  * PHP 5.4.0 or later
+ 
  * Console access to the application being maintained (shell, command prompt)
 
 ## Installation
@@ -27,14 +49,19 @@ It runs from the command line as standalone CLI tool or can be installed as a ZF
 ### Standalone installation using [composer](http://getcomposer.org)
 
  1. Open console (command prompt)
+ 
  2. `git clone https://github.com/ripaclub/zf2-sphinxsearch-tool.git`
+ 
  3. `cd zf2-sphinxsearch-tool`
+ 
  4. Run `composer install`
 
 ### Installation as ZF2 module using [composer](http://getcomposer.org)
 
  1. Open console (command prompt)
+ 
  2. Go to your application's directory
+ 
  3. Add the following to your **composer.json**
 
 ```json
@@ -84,14 +111,14 @@ If you use ZF2 Sphinx Search Tool as a module included into your application you
 
 ### Configuration
 
-A Sphinx Search configuration can be defined via the `sphinxsearch` node element into you ZF2 configurations. The children of this node will be merged (i.e., added or substituted to) with defaults provided by ZF2 Sphinx Search Tool.
+A Sphinx Search configuration can be defined via the `sphinxsearch` node element into you ZF2 configurations. The children of this node will be merged (i.e. added or substituted to) with defaults provided by ZF2 Sphinx Search Tool.
 
 It can have this children:
 
 - `variables`
 
     This node contains the variables that will be substituted into all your Sphinx Search configuration options.
-    The default variables are `log_path`, `lib_path`, `run_path`, and `idx_path` (respectively set to `/var/log/sphinx/`, `/var/lib/sphinx`, `/var/run/sphinx/`, and `/var/idx/sphinx/`).
+    Some default variables are `log_path`, `lib_path`, `run_path`, and `idx_path` (respectively set to `/var/log/sphinx/`, `/var/lib/sphinx`, `/var/run/sphinx/`, and `/var/idx/sphinx/`).
     You can define your variables (or override the defaults) and use them into your other settings wrapping them inside brackets.
 
 - `searchd`
@@ -109,12 +136,12 @@ It can have this children:
 - `indexes`
 
     This node contains the configurations of your indexes as an associative array which keys corresponds to index names.
-    For each index you define you have to specify its [options](http://sphinxsearch.com/docs/current.html#confgroup-index)
+    For each index you define you have to specify its [options](http://sphinxsearch.com/docs/current.html#confgroup-index) via associative arrays (also multidimensional if needed)
 
 - `sources`
 
     This node contains the configurations of you data source as an associative array which keys corresponds to source names.
-    For each data source you define you have to specifiy its [options](http://sphinxsearch.com/docs/current.html#confgroup-source)
+    For each data source you define you have to specifiy its [options](http://sphinxsearch.com/docs/current.html#confgroup-source) via associative arrays (also multidimensional if needed)
     
 #### Example
 
@@ -141,30 +168,28 @@ return [
         ],
         'indexes' => [
             'realtime' => [
-                'type = rt',
-                'path = {idx_path}realtime',
-                'rt_field = title',
-                'rt_field = content',
-                'rt_attr_uint = gid',
+                'type' => 'rt',
+                'path' => '{idx_path}realtime',
+                'rt_field' => ['title', 'content'],
+                'rt_attr_uint' => 'gid',
             ],
             'main' => [
-                'source = main',
-                'path = {idx_path}main',
+                'source' => 'main',
+                'path' => '{idx_path}main',
             ],
             'delta : main' => [
-                'source = delta',
-                'path = {idx_path}delta',
+                'source' => 'delta',
+                'path' => '{idx_path}delta',
             ]
         ],
         'sources' => [
             'main' => [
-                'sql_query_pre = SET NAMES utf8',
-                'sql_query_pre = REPLACE INTO sph_counter SELECT 1, MAX(id) FROM documents',
-                'sql_query = SELECT id, title, body FROM documents WHERE id<=(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
+                'sql_query_pre' => ['SET NAMES utf8', 'REPLACE INTO sph_counter SELECT 1, MAX(id) FROM documents'],
+                'sql_query' => 'SELECT id, title, body FROM documents WHERE id<=(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
             ],
             'delta : main' => [
-                'sql_query_pre = SET NAMES utf8',
-                'sql_query = SELECT id, title, body FROM documents WHERE id>(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
+                'sql_query_pre' => 'SET NAMES utf8',
+                'sql_query' => 'SELECT id, title, body FROM documents WHERE id>(SELECT max_doc_id FROM sph_counter WHERE counter_id=1)',
             ]
         ]
     ]
@@ -173,11 +198,82 @@ return [
 
 ##### Note
 
-For indexes and sources the specification happens with simple arrays (i.e., no keys, so they are not associative arrays) of Sphinx Search options strings.
+For indexes and sources the specification happens with simple arrays (i.e. no keys, so they are not associative arrays) of Sphinx Search options strings.
 
 ### Create data sources
 
+Suppose you have a result set (e.g. variable `$results`) obtained from a database (e.g. MongoDB) and you want to index them with Sphinx Search to serve searches through a plain index.
+
+First of all we need to create a data source (e.g. an `xmlpipe2` source) that will stream our documents to `php://stdout` (for this purpose we do not specify any URI for the writer).
+
+```php
+use SphinxSearch\Tool\Source\Writer\XML2;
 ...
+    $writer = new XML2();
+    $writer->setFields(
+        [
+            ['name' => 'name', 'attr' => 'string'],
+            ['name' => 'type'],
+        ]
+    );
+    $writer->setAttributes(
+        [
+            ['name' => 'lat', 'type' => 'float'],
+            ['name' => 'lng', 'type' => 'float'],
+            ['name' => 'price', 'type' => 'int'],
+        ]
+    );
+    $writer->beginOutput();
+    $count = 1;
+    foreach ($results as $result) {
+        $document = [
+            'id'                 => $count,
+            'name'               => $result['name'],
+            'lat'                => deg2rad(floatval($result['lat'])),
+            'lng'                => deg2rad(floatval($result['lng'])),
+            'price'              => (int) $result['price'],
+        ];
+        $writer->addDocument($document);
+        $count++;
+    }
+    $writer->endOutput();
+...
+```
+
+Suppose to wrap previous code in a controller console action (i.e. `sphinx xmlpipe2`), we can therefore use it as our `xmlpipe_command` to populate the Sphinx Search index.
+
+The `sphinx.config.php` of our project is:
+
+```php
+return [
+    'sphinxsearch' => [
+        'indexes' => [
+            'my_idx' => [
+                'type' => 'plain',
+                'path' => '{idx_path}restaurant_it',
+                'source' => 'my_source',
+                'dict' => 'keywords',
+                'charset_type' => 'utf-8',
+                'charset_table' => '{charset_utf8_default}',
+            ],
+        ],
+        'sources' => [
+            'my_source' => [
+                'type' => 'xmlpipe2',
+                'xmlpipe_command' => 'php -f ./public/index.php sphinx xmlpipe2'
+            ]
+        ]
+    ]
+];
+```
+
+We can now generate the `sphinx.conf`:
+ 
+```bash
+./vendor/bin/sphinx-tool.php sphinx print config --input=sphinx.config.php --output=sphinx.conf
+```
+
+Everything is now ready. We can call the indexer command (i.e. `indexer -c sphinx.conf --all --rotate`) and serve searches.
 
 ---
 

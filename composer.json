@@ -1,6 +1,6 @@
 {
     "name" : "ripaclub/zf2-sphinxsearch-tool",
-    "description" : "Module that provides a set of tools to configure and handle SphinxSearch engine",
+    "description" : "Utility that provides a set of tools to create and handle Sphinx Search configs and sources",
     "homepage" : "https://github.com/ripaclub/zf2-sphinxsearch-tool",
     "license" : "BSD-2-Clause",
     "require" : {

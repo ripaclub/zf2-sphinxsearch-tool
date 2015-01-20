@@ -10,7 +10,7 @@
  */
 namespace SphinxSearch\Tool\Source\Writer;
 
-use SphinxSearch\Tool\Source\Exception\NotValidDocumentException;
+use SphinxSearch\Tool\Source\Exception;
 
 /**
  * Interface SourceInterface
@@ -37,7 +37,7 @@ interface SourceInterface
      * If the document does not contain an identifier (i.e., element with id key) it throws an exception
      *
      * @param array $doc
-     * @throws NotValidDocumentException
+     * @throws Exception\NotValidDocumentException
      * @return string The current buffer as a string
      */
     public function addDocument(array $doc);

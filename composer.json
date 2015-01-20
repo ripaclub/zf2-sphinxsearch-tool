@@ -2,7 +2,7 @@
   "name": "ripaclub/zf2-sphinxsearch-tool",
   "description": "Utility that provides a set of tools to create and handle Sphinx Search configs and data sources",
   "homepage": "https://github.com/ripaclub/zf2-sphinxsearch-tool",
-  "license": "BSD-2-Clause",
+  "license": "BSD-3-Clause",
   "require": {
     "php": ">=5.4",
     "zendframework/zend-config": "~2.2",

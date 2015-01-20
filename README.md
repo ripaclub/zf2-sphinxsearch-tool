@@ -2,7 +2,7 @@
 
 **Sphinx Search Tool** is an utility that provides a set of tools to **create Sphinx Search configurations and data sources**.
 
-[![Latest Stable Version](http://img.shields.io/packagist/v/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://packagist.org/packages/ripaclub/zf2-sphinxsearch-tool) [![License](https://img.shields.io/badge/license-BSD--3-blue.svg?style=flat-square)](https://github.com/ripaclub/zf2-sphinxsearch-tool/blob/master/LICENSE)
+[![Latest Stable Version](http://img.shields.io/packagist/v/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://packagist.org/packages/ripaclub/zf2-sphinxsearch-tool) [![License](https://img.shields.io/packagist/l/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://github.com/ripaclub/zf2-sphinxsearch-tool/blob/master/LICENSE) [![VersionEye](https://www.versioneye.com/php/ripaclub:zf2-sphinxsearch-tool/badge.svg?style=flat-square)](https://www.versioneye.com/php/ripaclub:zf2-sphinxsearch-tool)
 
 ## Features
 

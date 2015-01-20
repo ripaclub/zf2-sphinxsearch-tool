@@ -45,11 +45,14 @@
     "TSV"
   ],
   "autoload": {
-    "classmap": ["./Module.php"]
+    "classmap": ["./Module.php"],
+    "psr-4": {
+      "SphinxSearch\\Tool\\": "src/"
+    }
   },
   "autoload-dev": {
-    "psr-0": {
-      "SphinxSearch\\ToolTest": "tests"
+    "psr-4": {
+      "SphinxSearch\\ToolTest\\": "tests/"
     }
   },
   "bin": [

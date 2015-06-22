@@ -2,7 +2,7 @@
 
 **Sphinx Search Tool** is an utility that provides a set of tools to **create Sphinx Search configurations and data sources**.
 
-[![Latest Stable Version](http://img.shields.io/packagist/v/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://packagist.org/packages/ripaclub/zf2-sphinxsearch-tool) [![License](https://img.shields.io/packagist/l/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://github.com/ripaclub/zf2-sphinxsearch-tool/blob/master/LICENSE) [![VersionEye](https://www.versioneye.com/php/ripaclub:zf2-sphinxsearch-tool/badge.svg?style=flat-square)](https://www.versioneye.com/php/ripaclub:zf2-sphinxsearch-tool)
+[![Latest Stable Version](http://img.shields.io/packagist/v/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://packagist.org/packages/ripaclub/zf2-sphinxsearch-tool) [![License](https://img.shields.io/packagist/l/ripaclub/zf2-sphinxsearch-tool.svg?style=flat-square)](https://github.com/ripaclub/zf2-sphinxsearch-tool/blob/master/LICENSE)
 
 ## Features
 
@@ -275,4 +275,4 @@ Everything is now ready. We can call the indexer command (i.e. `indexer -c sphin
 
 ---
 
-[![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-sphinxsearch-tool)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://ga-beacon.appspot.com/UA-49657176-3/zf2-sphinxsearch-tool)](https://github.com/igrigorik/ga-beacon)
